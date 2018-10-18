@@ -4,7 +4,7 @@ Depot git du projet Cloud Computing de Mohamed Chennouf, Meersman Rudy, Duminy G
 ## Architecture
 
 
-![png architecture du projet](archiV0.png)
+ ![archi](/image/archi-cloud-v0.pdf)
 
 Dans cette architecture, nous avons 5 composants : 
 
