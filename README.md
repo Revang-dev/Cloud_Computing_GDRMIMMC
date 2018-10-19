@@ -68,7 +68,7 @@ Nous avons choisi d'avoir 4 instances afin de pouvoir gérer les 4 requêtes que
  
  ## Calcul du coût
  
-Le coût d'une instance F2 est indiqué à $0.10/h sur le site de google cloud.
+Le coût d'une instance F2 est indiqué à $0.10/h sur le site de google cloud pour les machines situées en Belgique (les plus proches).
 
 Nous avons donc une base de 4 instance F2 qui tourne 24 heures sur 24 et 7 jours sur 7.
 Le coût par mois est donc de : 0.10 * 4 * 24 * 31 = $297.60/mois. Lorsqu'un surplus d’utilisateur surchargent une instance, on scale et on ajoute une machine pour supporter la charge. On a un scaling qui peut au pire des cas doubler soit $595.20/mois.
