@@ -3,30 +3,40 @@ Depot git du projet Cloud Computing de Mohamed Chennouf, Meersman Rudy, Duminy G
 
 ## Architecture
 
-
- ![archi](/image/archi-cloud-v0.pdf)
+ ![architecture](/image/archi.pdf)
 
 Dans cette architecture, nous avons 5 composants : 
 
-<b>Download</b>: ce module se charge de télécharger les fichiers demandé par l'utilisateur. Il contient une API prenant email de l'utilisateur et id du fichier à télécharger. Suivant le type utilisateur (Noob, Casual, Leet), celui-ci va mettre les requetes dans une queue approprié :
+<b>Download</b>: Ce module télécharge les fichiers demandés par l'utilisateur. Il contient une API prenant l'email de l'utilisateur et l'identifiant du fichier à télécharger. Suivant le type utilisateur (Noob, Casual, Leet), celui-ci va mettre les requêtes dans une queue appropriée :
+
 <ul>
-<li> Les files d'attente Push exécutent des taches en transmettant des demandes aux "workeur". Elles envoient leurs demandes à un rythme fiable et régulier et garentissent une exécution fiable des taches. Ces taches sont traités les unes après les autres, dans l'ordre de leur arrivée. Il est possible de controler le taux d'envoi des taches à partir de la file d'attente, nous permettant de minimiser le nombre de "workeur". Ce controle du nombre de workeur nous permet de minimiser les couts. C'est pourquoi nous avons choisi une push queue pour les "Noob" car leurs demandes sont traités séquencielement et que chaque minute, les utilisateurs ne peuvent faire qu'une seul demande.  
- 
+<li> Les files d'attente Push exécutent des taches en transmettant des demandes aux "workeurs". Elles envoient leurs demandes à un rythme fiable et régulier et garantissent une exécution fiable des tâches. Ces taches sont traitées les unes après les autres, dans l'ordre de leur arrivée. Il est possible de contrôler le taux d'envoi des taches à partir de la file d'attente, nous permettant de minimiser le nombre de "workeur". Ce contrôle du nombre de workeur nous permet de minimiser les couts. C'est pourquoi nous avons choisi une push queue pour les "Noob" car leurs demandes sont traités séquencielement et chaque minute les utilisateurs ne peuvent faire qu'une seule demande.
 
-<li> Les files d'attente Pull donnent plus de flexibilité quant au moment ou les taches sont traitées. Ces fils d'attente fonctionnent bien lorsque l'on doit regrouper des taches pour une exécution efficace. Les pull queue permettent aussi de priorisé certaine tache car contrairement à la push queue, on peut choisir l'odre à laquelle les taches vont etre exécuté. Grace à la pull queue, on peut grouper deux taches (download 1+download 2) et les exécuter en meme temps. Un workeur de la pull queue pourrai se réveillé périodiquement toute les 1 min pour exécuter les deux opérations des "Casual". De meme, un autre workeur pourrai toute les min exécuter les 4 opération des "Leet". C'est pour cela que nous avons choisi une pull queue pour les Leet et Casual.
-
+<li> Les files d'attente Pull donnent plus de flexibilité quant au moment où les taches sont traitées. Ces fils d'attente fonctionnent bien lorsque l'on doit regrouper des taches pour une exécution efficace. Les pulls queue permettent aussi de prioriser certaines taches car contrairement à la push queue, on peut choisir l'ordre auquel les taches vont être exécuté. Grâce aux pull queue, on peut grouper deux taches (download 1+download 2) et les exécuter en même temps. Un workeur du pull queue pourrait se réveiller périodiquement toutes les 1 min pour exécuter les deux opérations des "Casual". De même, un autre workeur pourrait toutes les min exécuter les 4 opérations des "Leet". C'est pour cela que nous avons choisi deux pull queue, une pour les "Leet" et une pour les "Casual".
 </ul> 
 
-Une fois la tache exécuter par les workeurs, Le module Download apelle le module Mail pour envoyer un mail avec le lien du fichier à télécharger.
+Une fois la tache exécutée par les workeurs, Le module download appelle le module Mail pour envoyer un mail avec le lien du fichier à télécharger.
 
+<b>Upload</b>: Ce composant se charge d'upload les fichiers. Ce module a une API qui prend l'id de l'utilisateur(email) et la taille du fichier à upload et charge un fichier de la taille demandé dans la base de donné. Une fois upload, le module appelle le composant Mail pour envoyé le récapitulatif plus le lien à télécharger. Ce module met aussi à jour la base de donné des utilisateurs en incrémentant le score de la personne.
 
-<b>Upload</b>: Ce composant se charge d'upload les fichiers. Ce module a une API qui prend l'id de l'utilisateur(email) et la taille du fichier à upload et charge un fichier de la taille demandé dans la base de donné. Une fois l'uploadé, le module apelle le composant Mail pour envoyé le récapitulatif plus le lien à télécharger à l'utiliseur. Ce module met aussi à jour la base de donné des utilisateurs en incrémentant le score de la personne.
+<b>Account</b>: Ce module permet des creer ou supprimer un compte utilisateur.
 
-<b>Account</b>: Ce module permet de creer ou supprimer un compte utilisateur.
-
-<b>LeaderBoard</b>: Ce module récupère tous utilisateurs et les class par score.
+<b>LeaderBoard</b>: Ce module récupère tous utilisateurs et les classent par score.
 
 <b>Mail</b>: Ce module se charge d'envoyer des mails.
+
+
+<b>Résumé des queues</b>:
+Nous avons donc 3 queues pour gérer les différentes requêtes :
+    
+    - une push queue pour les noobs.
+ Les téléchargements demandées par les "Noob" sont mises à la chaîne à l’intérieur et traitée dans l’ordre où elles ont été émises.
+    
+    - une pull queue pour les Casual
+ Elle permet de traiter les demandes de téléchargement 2 par 2 maximum pour un utilisateur Casual. Si cette queue est surchargée de l’ordre du double de la queue des "Leet", les prochains "Casual" seront mis dans la queues des "Leet.
+    
+    - une pull queue pour les Leet
+ La queue réservé aux "Leet" traite leurs demandes 4 par 4 maximum, si la queue est surchargé, les "Leet" suivants seront traités dans la queue des "Casual".
 
 ## Elasticité
 
