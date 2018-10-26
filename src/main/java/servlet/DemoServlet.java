@@ -14,18 +14,21 @@
  * limitations under the License.
  */
 
-package myapp;
+package servlet;
 
 import java.io.IOException;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class DemoServlet extends HttpServlet {
+
+  private static String message = "toto est malade, toto veux plus faire de cloud";
+
+
   @Override
-  public void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws IOException {
-    resp.setContentType("text/plain");
-    resp.getWriter().println("{ \"name\": \"World\" }");
+  public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    req.getRequestDispatcher("mainpage.jsp").forward(req, resp);
   }
 }
