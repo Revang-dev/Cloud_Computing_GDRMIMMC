@@ -4,3 +4,7 @@ Depot git du projet Cloud Computing de Mohamed Chennouf, Meersman Rudy, Duminy G
 # Delivrable 1
 19/10/18:
 * Architecure.pdf
+
+# Delivrable 2
+02/11/18:
+* Couche de Donnée.pdf
