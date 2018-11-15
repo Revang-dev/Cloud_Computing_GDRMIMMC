@@ -21,6 +21,16 @@ public class Users {
         this.id = 0;
     }
 
+
+    public  Users(String newEmail,String mdp, String level){
+        this.email = newEmail;
+        this.level = "Noob";
+        this.point = 0;
+        this.password = mdp;
+        this.id = 0;
+        this.level = level;
+    }
+
     //GETTER//
     public String getEmail(){
         return this.email;

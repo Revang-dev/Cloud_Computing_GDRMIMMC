@@ -1,12 +1,21 @@
 package servlet;
 
+import Database.UserDataStore;
+import Entity.Users;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class CreationUser extends HttpServlet{
+    UserDataStore userManager = new UserDataStore();
     //////////////////////__JSON__///////////////////////////////
     /*
     {Action: “addUser”,
@@ -24,6 +33,29 @@ public class CreationUser extends HttpServlet{
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        StringBuffer jb = new StringBuffer();
+        String line = null;
+        try {
+            BufferedReader reader = req.getReader();
+            while ((line = reader.readLine()) != null) {
+                jb.append(line);
+            }
+        } catch (Exception e) { /*report an error*/ }
+
+        try {
+            JsonParser jparser = new JsonParser();
+            JsonElement obj = jparser.parse(jb.toString());
+            JsonObject jsontest = obj.getAsJsonObject();
+            String username = jsontest.get("username").getAsString();
+            //String level = jsontest.get("level").getAsString();
+            String mdp = jsontest.get("mdp").getAsString();
+            Users newAccount = new Users(username, mdp);
+            userManager.addUser(newAccount);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            resp.getWriter().println(e.toString());
+        }
     }
 
 }

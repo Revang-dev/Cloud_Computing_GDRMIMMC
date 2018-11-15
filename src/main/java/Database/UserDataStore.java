@@ -35,6 +35,6 @@ public class UserDataStore {
                 .set("point",user.getPoint())
                 .set("password",user.getPassword())
                 .build();
-        Entity newUser = datastore.add(userData);
+        datastore.add(userData);
     }
 }
