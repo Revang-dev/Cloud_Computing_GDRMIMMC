@@ -94,4 +94,9 @@ public class Users {
         }
     }
 
+    @Override
+    public String toString(){
+        return "email: "+email+", point:"+point+", level:"+level;
+    }
+
 }

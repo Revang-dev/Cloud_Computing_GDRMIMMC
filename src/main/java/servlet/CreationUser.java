@@ -33,6 +33,7 @@ public class CreationUser extends HttpServlet{
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        PrintWriter out = resp.getWriter();
         StringBuffer jb = new StringBuffer();
         String line = null;
         try {
@@ -51,10 +52,11 @@ public class CreationUser extends HttpServlet{
             String mdp = jsontest.get("mdp").getAsString();
             Users newAccount = new Users(username, mdp);
             userManager.addUser(newAccount);
+            out.println(newAccount.toString());
         }
         catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().println(e.toString());
+            out.println(e.toString());
         }
     }
 
