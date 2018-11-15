@@ -20,6 +20,14 @@ public class Users {
         this.password = mdp;
         this.id = 0;
     }
+    
+    public  Users(String newEmail,String mdp, int point, String level){
+        this.email = newEmail;
+        this.level = level;
+        this.point = point;
+        this.password = mdp;
+        this.id = 0;
+    }
 
     //GETTER//
     public String getEmail(){
