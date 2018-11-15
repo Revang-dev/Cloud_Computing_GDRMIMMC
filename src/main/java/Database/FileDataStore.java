@@ -1,5 +1,6 @@
 package Database;
 
-public class File {
+public class FileDataStore {
     //EmailUtilisateur, Url, Poids, Statut, DataCreation, Type, ID
+
 }
