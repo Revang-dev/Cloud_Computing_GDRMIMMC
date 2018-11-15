@@ -32,6 +32,26 @@
         <servlet-name>demo</servlet-name>
         <url-pattern>/demo</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>upload</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>connexion</servlet-name>
+        <url-pattern>/connexion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>leaderboard</servlet-name>
+        <url-pattern>/leaderboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>creation</servlet-name>
+        <url-pattern>/creation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>main</servlet-name>
+        <url-pattern>/main</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>mainpage.jsp</welcome-file>
     </welcome-file-list>

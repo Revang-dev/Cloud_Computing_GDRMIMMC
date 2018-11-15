@@ -1,5 +1,7 @@
 package Database;
 
+import Entity.Users;
+
 import com.google.cloud.datastore.*;
 
 
@@ -17,12 +19,12 @@ public class UserDataStore {
 
     }
 
-    public void addUser(String mail){
+    public void addUser(Users user){
         IncompleteKey key = keyFactory.newKey();
         FullEntity<IncompleteKey> userData = Entity.newBuilder(key)
-                .set("mail",mail)
-                .set("level", 0)
-                .set("point", 0)
+                .set("mail",user.getEmail())
+                .set("level",user.getLevel())
+                .set("point",user.getPoint())
                 .build();
         Entity newUser = datastore.add(userData);
     }
