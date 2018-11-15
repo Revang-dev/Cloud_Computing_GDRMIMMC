@@ -15,8 +15,16 @@ public class UserDataStore {
         keyFactory = datastore.newKeyFactory().setKind("User2");
     }
 
-    public void updateUser(){
 
+    public void updateUser(Users user){
+        Key key = keyFactory.newKey(user.getId());
+        Entity entity = Entity.newBuilder(key)
+                .set(Users.EMAIL, user.getEmail())
+                .set(Users.PASSWORD, user.getPassword())
+                .set(Users.LEVEL, user.getLevel())
+                .set(Users.POINT, user.getPoint())
+                .build();
+        datastore.update(entity);
     }
 
     public void addUser(Users user){
@@ -25,6 +33,7 @@ public class UserDataStore {
                 .set("mail",user.getEmail())
                 .set("level",user.getLevel())
                 .set("point",user.getPoint())
+                .set("password",user.getPassword())
                 .build();
         Entity newUser = datastore.add(userData);
     }

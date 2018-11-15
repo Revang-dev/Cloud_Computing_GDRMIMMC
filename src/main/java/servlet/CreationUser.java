@@ -21,14 +21,9 @@ public class CreationUser extends HttpServlet{
     }
     */
     /////////////////////////////////////////////////////////////
-    @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-
-    }
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-
     }
 
 }
