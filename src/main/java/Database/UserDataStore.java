@@ -40,10 +40,10 @@ public class UserDataStore {
     public static void addUser(Users user){
         IncompleteKey key = keyFactory.newKey();
         FullEntity<IncompleteKey> userData = Entity.newBuilder(key)
-                .set("mail",user.getEmail())
-                .set("level",user.getLevel())
-                .set("point",user.getPoint())
-                .set("password",user.getPassword())
+                .set(Users.EMAIL,user.getEmail())
+                .set(Users.LEVEL,user.getLevel())
+                .set(Users.POINT,user.getPoint())
+                .set(Users.PASSWORD,user.getPassword())
                 .build();
         Entity newUser = datastore.add(userData);
     }
