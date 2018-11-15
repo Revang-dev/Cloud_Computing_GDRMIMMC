@@ -16,4 +16,5 @@
     <system-properties>
         <property name="appengine.api.urlfetch.defaultDeadline" value="15"/>
     </system-properties>
+    <runtime>java8</runtime>
 </appengine-web-app>
