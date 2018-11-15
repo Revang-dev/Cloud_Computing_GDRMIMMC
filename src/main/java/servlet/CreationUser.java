@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class CreationUser extends HttpServlet{
-    UserDataStore userManager = new UserDataStore();
+    UserDataStore userManager = UserDataStore.getInstance();
     //////////////////////__JSON__///////////////////////////////
     /*
     {Action: “addUser”,

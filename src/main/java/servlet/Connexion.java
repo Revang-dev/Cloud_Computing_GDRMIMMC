@@ -28,7 +28,7 @@ public class Connexion extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-    	JsonGenerator.getInstance();
+    	/*JsonGenerator.getInstance();
     	UserDataStore.getInstance();
     	JsonObject json = JsonGenerator.requestToJson(req);
     	Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
@@ -39,6 +39,6 @@ public class Connexion extends HttpServlet {
     		String email = body.get("userID").toString();
     		String pass = body.get("pass").toString();
     		user = UserDataStore.getUser(email, pass);
-    	}
+    	} */
     }
 }
