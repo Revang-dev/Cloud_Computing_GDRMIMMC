@@ -39,6 +39,6 @@ public class Connexion extends HttpServlet {
     		String email = body.get("userID").toString();
     		String pass = body.get("pass").toString();
     		user = UserDataStore.getUser(email, pass);
-    	} */
+    	}*/
     }
 }
