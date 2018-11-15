@@ -23,7 +23,7 @@ public class Files {
     public static final String ID = "id";
     public static final String STATUT = "statut";
     // [END keys]
-    
+
     public Files(String newEmail, String newUrl, double newWeight, String newType){
         this.emailUtilisateur = newEmail;
         this.url = newUrl;
