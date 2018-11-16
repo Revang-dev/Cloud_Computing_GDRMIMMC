@@ -24,16 +24,16 @@ public class PullQueue {
 		myQueue = QueueFactory.getQueue("pull-queue");
 	}
 	
-	public void addTask(String payload) {
-		myQueue.add(TaskOptions.Builder.withMethod(TaskOptions.Method.PULL).payload(payload));
+	public void addTask(String taskName,String payload) {
+		myQueue.add(TaskOptions.Builder.withMethod(TaskOptions.Method.PULL).payload(payload).taskName(taskName));
 	}
 	
-	public void addTask(byte[] payload) {
-		myQueue.add(TaskOptions.Builder.withMethod(TaskOptions.Method.PULL).payload(payload));
+	public void addTask(String taskName,byte[] payload) {
+		myQueue.add(TaskOptions.Builder.withMethod(TaskOptions.Method.PULL).payload(payload).taskName(taskName));
 	}
 	
-	public void addTask(byte[] payload,String contentType) {
-		myQueue.add(TaskOptions.Builder.withMethod(TaskOptions.Method.PULL).payload(payload,contentType));
+	public void addTask(String taskName,byte[] payload,String contentType) {
+		myQueue.add(TaskOptions.Builder.withMethod(TaskOptions.Method.PULL).payload(payload,contentType).taskName(taskName));
 	}
 	
 	public List<TaskHandle> taskLease(long time, TimeUnit timeUnit,long numberOfLease){
