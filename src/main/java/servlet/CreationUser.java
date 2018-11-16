@@ -78,7 +78,7 @@ public class CreationUser extends HttpServlet{
         ArrayList<Users> list = userManager.getAllUser();
         for(Users usr : list){
             out.println("----------------------------------------------------\n");
-            out.println(usr+"\n");
+            out.println(usr.toString()+"\n");
             out.println("----------------------------------------------------\n");
         }
     }
