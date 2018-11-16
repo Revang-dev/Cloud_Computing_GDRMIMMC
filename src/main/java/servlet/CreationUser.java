@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class CreationUser extends HttpServlet{
     UserDataStore userManager = UserDataStore.getInstance();
@@ -31,7 +32,7 @@ public class CreationUser extends HttpServlet{
     */
     /////////////////////////////////////////////////////////////
 
-    @Override
+   /* @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         // Set response content type
         resp.setContentType("text/html");
@@ -39,7 +40,7 @@ public class CreationUser extends HttpServlet{
         // Actual logic goes here.
         PrintWriter out = resp.getWriter();
         out.println("<h1>" + "Yo" + "</h1>");
-    }
+    }*/
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -69,5 +70,18 @@ public class CreationUser extends HttpServlet{
             out.println(e.toString());
         }
     }
+
+
+    @Override
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        PrintWriter out = resp.getWriter();
+        ArrayList<Users> list = userManager.getAllUser();
+        for(Users usr : list){
+            out.println("----------------------------------------------------\n");
+            out.println(usr+"\n");
+            out.println("----------------------------------------------------\n");
+        }
+    }
+
 
 }

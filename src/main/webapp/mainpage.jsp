@@ -66,10 +66,15 @@
 <div>
 
 <h2>Créer un utilisateur</h2>
-   Username: <input type="text" name="enter" class="enter" value="Jean Michel" id="username"><br><br>
-   Email: <input type="text" name="enter" class="enter" value="JeanMichel@unice.fr" id="email"><br><br>
-   Rank: <input type="text" name="enter" class="enter" value="gold" id="accountlevel"><br><br>
+   Username: <input type="text" name="enter" class="enter" value="rydy@unice.fr" id="username"><br><br>
+   Passeword: <input type="text" name="enter" class="enter" value="1234" id="mdp"><br><br>
    <input type="submit"  value="Inscrire" onclick="postaccount();"/>
+
+<h2>Créer un utilisateur avec rank </h2>
+   Username: <input type="text" name="enter" class="enter" value="rydy@unice.fr" id="username"><br><br>
+   Passeword: <input type="text" name="enter" class="enter" value="1234" id="mdp"><br><br>
+   Rank: <input type="text" name="enter" class="enter" value="noob" id="rank"><br><br>
+   <input type="submit"  value="Inscrire" onclick="postaccountrank();"/>
 
 <h2>Poster un fichier</h2>
         Username: <input type="text" name="enter" class="enter" value="Jean Michel" id="username"><br><br>
