@@ -24,6 +24,10 @@ public class PullQueue {
 		myQueue = QueueFactory.getQueue("pull-queue");
 	}
 	
+	public Queue getQueue() {
+		return myQueue;
+	}
+	
 	public void addTask(String taskName,String payload) {
 		myQueue.add(TaskOptions.Builder.withMethod(TaskOptions.Method.PULL).payload(payload).taskName(taskName));
 	}
