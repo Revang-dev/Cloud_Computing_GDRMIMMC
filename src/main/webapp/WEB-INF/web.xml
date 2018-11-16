@@ -1,36 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE web-app PUBLIC
- "-//Oracle Corporation//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd">
 
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
     <servlet>
-        <servlet-name>upload</servlet-name>
-        <servlet-class>servlet.Upload</servlet-class>
+        <servlet-name>demo</servlet-name>
+        <servlet-class>servlet.DemoServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>connexion</servlet-name>
         <servlet-class>servlet.Connexion</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>creation</servlet-name>
+        <servlet-class>servlet.CreationUser</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>leaderboard</servlet-name>
         <servlet-class>servlet.LeaderBoard</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>demo</servlet-name>
-        <servlet-class>servlet.DemoServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>creation</servlet-name>
-        <servlet-class>servlet.CreationUser</servlet-class>
+        <servlet-name>upload</servlet-name>
+        <servlet-class>servlet.Upload</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>main</servlet-name>
         <servlet-class>servlet.MainPage</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>demo</servlet-name>
-        <url-pattern>/demo</url-pattern>
+        <servlet-name>main</servlet-name>
+        <url-pattern>/main</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>creation</servlet-name>
+        <url-pattern>/creation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>leaderboard</servlet-name>
+        <url-pattern>/leaderboard</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>upload</servlet-name>
@@ -41,16 +51,8 @@
         <url-pattern>/connexion</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>leaderboard</servlet-name>
-        <url-pattern>/leaderboard</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>creation</servlet-name>
-        <url-pattern>/creation</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>main</servlet-name>
-        <url-pattern>/main</url-pattern>
+        <servlet-name>demo</servlet-name>
+        <url-pattern>/demo</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>mainpage.jsp</welcome-file>
