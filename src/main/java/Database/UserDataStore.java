@@ -30,9 +30,7 @@ public class UserDataStore {
 
 
     public static void updateUser(Users user) {
-        Users res = null;
         Entity potencial_user;
-
         EntityQuery datastore_query = Query.newEntityQueryBuilder()
                 .setKind("User2")
                 .build();

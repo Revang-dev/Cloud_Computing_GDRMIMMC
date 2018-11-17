@@ -66,7 +66,7 @@ public class FileDataStore {
         while (datastore_files.hasNext()) {
             potencial_file = datastore_files.next();
             if (Integer.toString(id).equals(potencial_file.getString(Files.ID))) {
-                res = new Files(potencial_file.getString(Files.EMAIL), potencial_file.getString(Files.URL), Double.parseDouble(potencial_file.getString(Files.WEIGHT)), potencial_file.getString(Files.TYPE));
+                res = new Files(potencial_file.getString(Files.EMAIL), potencial_file.getString(Files.NAME),potencial_file.getString(Files.URL), Double.parseDouble(potencial_file.getString(Files.WEIGHT)), potencial_file.getString(Files.TYPE));
             }
         }
 

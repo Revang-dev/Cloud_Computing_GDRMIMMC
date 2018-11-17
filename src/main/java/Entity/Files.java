@@ -14,6 +14,7 @@ public class Files {
     private String type;
     private int id;
     private String statut;
+    private String name;
     //[START keys]
     public static final String EMAIL = "userEmail";
     public static final String URL = "url";
@@ -22,13 +23,15 @@ public class Files {
     public static final String TYPE = "type";
     public static final String ID = "id";
     public static final String STATUT = "statut";
+    public static final String NAME = "name";
     // [END keys]
 
-    public Files(String newEmail, String newUrl, double newWeight, String newType){
+    public Files(String newEmail,String name, String newUrl, double newWeight, String newType){
         this.emailUtilisateur = newEmail;
         this.url = newUrl;
         this.weight = newWeight;
         this.type = newType;
+        this.name = name;
         this.id = 0;
         this.statut = "Alive";
         this.dateCreation = DateFormat.getDateTimeInstance(DateFormat.SHORT,
@@ -64,6 +67,10 @@ public class Files {
         return this.statut;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
     //SETTER//
     public void setEmailUtilisateur(String data){
         this.emailUtilisateur = data;
@@ -91,6 +98,10 @@ public class Files {
 
     public void setStatut(String data){
         this.statut = data;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     //FUNCTION//
