@@ -98,7 +98,7 @@ public class UserDataStore {
         return res;
     }
     
-    public static Users getUser(String mail){
+    public static Users getUserbyMail(String mail){
         Users res = null;
         Entity potencial_user;
 
@@ -110,7 +110,7 @@ public class UserDataStore {
         while (datastore_users.hasNext()) {
             potencial_user = datastore_users.next();
             if (mail.equals(potencial_user.getString(Users.EMAIL))) {
-                res = new Users(potencial_user.getString(Users.EMAIL), potencial_user.getString(Users.PASSWORD), potencial_user.getLong(Users.POINT), potencial_user.getString(Users.LEVEL), potencial_user.getString("requetes"));
+                res = new Users(potencial_user.getString(Users.EMAIL), potencial_user.getString(Users.PASSWORD), potencial_user.getLong(Users.POINT), potencial_user.getString(Users.LEVEL), potencial_user.getString(Users.REQUETES));
             }
         }
 

@@ -12,6 +12,15 @@ public class EmptyFileGenerator {
         f.setLength(size * KILO);
 	}
 
+	public static byte[] CreateLocalFile(int size) throws IOException {
+		int taille = size * 1024;
+		byte[] out = new byte[taille];
+		for (int i = 0; i < taille; i++) {
+			out[i] = (byte) 1;
+		}
+		return out;
+	}
+
 	public static void main(String[] args) throws IOException {
 		CreateFile(5,"test1");
 	}

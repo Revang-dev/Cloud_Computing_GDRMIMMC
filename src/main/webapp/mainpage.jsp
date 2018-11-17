@@ -23,7 +23,7 @@
 
         body
         {
-            background-color : brown ;
+            background-color : 	#00008B ;
             color : white
         }
 
@@ -79,7 +79,7 @@
                             var url = "https://cloudprojetmomo.appspot.com/creation";
                             xhr.open("POST", url, true);
                             xhr.setRequestHeader("Content-type", "application/json");
-                            var data = JSON.stringify({ "Action" : "addUser", "Body": { "userID":document.getElementById('username').value, "pass": document.getElementById('mdp').value, "level": document.getElementById('rank').value } });
+                            var data = JSON.stringify({ "Action" : "addUser", "Body": { "userID":document.getElementById('username2').value, "pass": document.getElementById('mdp2').value, "level": document.getElementById('rank').value } });
                             xhr.send(data);
                             xhr.onreadystatechange = function() {
                                 if (this.readyState == 4 && this.status == 200) {
@@ -87,6 +87,22 @@
                                 }
                             };
                         }
+
+         function connexion() {
+                var xhr = new XMLHttpRequest();
+                var url = "https://cloudprojetmomo.appspot.com/connexion";
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader("Content-type", "application/json");
+                var data = JSON.stringify({ "Action" : "Connexion", "Body": { "userID":document.getElementById('username3').value, "pass": document.getElementById('mdp3').value }});
+                xhr.send(data);
+                xhr.onreadystatechange = function() {
+                   if (this.readyState == 4 && this.status == 200) {
+                           alert(this.responseText);
+                   }
+                };
+           }
+
+
 
      </script>
 </head>
@@ -101,10 +117,16 @@
    <input type="submit"  value="Inscrire" onclick="postaccount();"/>
 
 <h2>Créer un utilisateur avec rank </h2>
-   Username: <input type="text" name="enter" class="enter" value="rydy@unice.fr" id="username"><br><br>
-   Passeword: <input type="text" name="enter" class="enter" value="1234" id="mdp"><br><br>
-   Rank: <input type="text" name="enter" class="enter" value="noob" id="rank"><br><br>
+   Username: <input type="text" name="enter" class="enter" value="rydy@unice.fr" id="username2"><br><br>
+   Passeword: <input type="text" name="enter" class="enter" value="1234" id="mdp2"><br><br>
+   Rank: <input type="text" name="enter" class="enter" value="Leet" id="rank"><br><br>
    <input type="submit"  value="Inscrire" onclick="postaccountrank();"/>
+
+
+<h2> Connexion </h2>
+   Username: <input type="text" name="enter" class="enter" value="rydy@unice.fr" id="username3"><br><br>
+   Passeword: <input type="text" name="enter" class="enter" value="1234" id="mdp3"><br><br>
+   <input type="submit"  value="Connexion" onclick="connexion();"/>
 
 <h2>Poster un fichier</h2>
         Username: <input type="text" name="enter" class="enter" value="Jean Michel" id="username"><br><br>
