@@ -2,8 +2,11 @@ package Database;
 
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
-import com.google.cloud.storage.Storage.BlobSourceOption;
 import com.google.cloud.storage.StorageOptions;
+
+import Entity.Users;
+import mail.MailSender;
+
 import com.google.cloud.storage.BlobId;
 
 public class DownloadCloudStore {
@@ -25,12 +28,9 @@ public class DownloadCloudStore {
         storage = StorageOptions.getDefaultInstance().getService();
     }
     
-    public byte[] downloadFile(String blobName){
+    public void downloadFile(Users user,String blobName){
 
-        BlobInfo blobInfo = storage.get(BlobId.of(bucket, blobName));
-        
-        byte[] file=storage.readAllBytes(blobInfo.getBlobId(),BlobSourceOption.generationMatch());
-        
-        return file;
+        BlobInfo blobInfo = storage.get(BlobId.of(bucket, blobName));     
+        MailSender.SendLinkTo(user.getEmail(), blobInfo.getMediaLink());
     }
 }
