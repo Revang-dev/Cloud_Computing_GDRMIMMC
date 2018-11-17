@@ -3,7 +3,10 @@ package servlet;
 import Database.DownloadCloudStore;
 import Database.FileDataStore;
 import Database.UploadCloudStore;
+import Database.UserDataStore;
 import Entity.Files;
+import Entity.Users;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -62,7 +65,41 @@ public class Upload extends HttpServlet {
             byte[] file = java.nio.file.Files.readAllBytes(Paths.get(fileURL));
             String type = jsontest.get("type").getAsString();
             String trueUrl = fileURL + cloud.uploadFile(name,file);
-            fileManager.addFile(new Files(email, name, trueUrl, taille, type));
+            
+            Users user = UserDataStore.getUser(email);
+            int time = (int) System.currentTimeMillis();
+            if (user != null) {
+            	switch(user.getLevel()) {
+            	
+            	case "Noob":
+            		if (time - user.getReq(0) > 60000) {
+            			user.setReq(0, time);
+            			fileManager.addFile(new Files(email, name, trueUrl, taille, type));
+            		}
+            		else {
+            			// send mail: lol noob
+            		}
+            	
+            	case "Casual":
+            		for (int i = 0; i < 2; i++) {
+            			if (time - user.getReq(i) > 60000) {
+                			user.setReq(i, time);
+                			fileManager.addFile(new Files(email, name, trueUrl, taille, type));
+                			break;
+                		}
+            		}
+            	
+            	case "Leet":
+            		for (int i = 0; i < 4; i++) {
+            			if (time - user.getReq(i) > 60000) {
+                			user.setReq(i, time);
+                			fileManager.addFile(new Files(email, name, trueUrl, taille, type));
+                			break;
+                		}
+            		}
+            	}
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
             out.println(e.toString());

@@ -1,10 +1,16 @@
 package Entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.cloud.datastore.Value;
+
 public class Users {
     private String email;
     private long point;
     private String level;
     private String password;
+    private ArrayList<Integer> req;
     //[START keys]
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
@@ -17,15 +23,11 @@ public class Users {
         this.level = "Noob";
         this.point = 0;
         this.password = mdp;
+        this.req = new ArrayList<Integer>();
+        for (int i = 0; i < 4; i++) {
+        	this.req.add((int) (System.currentTimeMillis() - 60000)); // 60000 = 1 minute
+        }
     }
-    
-    public  Users(String newEmail,String mdp, long point, String level){
-        this.email = newEmail;
-        this.level = level;
-        this.point = point;
-        this.password = mdp;
-    }
-
 
     public  Users(String newEmail,String mdp, String level){
         this.email = newEmail;
@@ -33,6 +35,19 @@ public class Users {
         this.point = 0;
         this.password = mdp;
         this.level = level;
+        this.req = new ArrayList<Integer>();
+        for (int i = 0; i < 4; i++) {
+        	this.req.add((int) (System.currentTimeMillis() - 60000)); // 60000 = 1 minute
+        }
+    }
+    
+    @SuppressWarnings("unchecked")
+	public  Users(String newEmail,String mdp, long point, String level, List<Value<?>> req){
+        this.email = newEmail;
+        this.level = level;
+        this.point = point;
+        this.password = mdp;
+        this.req = (ArrayList<Integer>) (ArrayList<?>) req;
     }
 
     //GETTER//
@@ -51,6 +66,10 @@ public class Users {
     public String getPassword(){
         return this.password;
     }
+    
+    public long getReq(int i) {
+		return req.get(i);
+	}
 
     //SETTER//
     public void setEmail(String newEmail){
@@ -68,6 +87,11 @@ public class Users {
     public void setPassword(String mdp){
         this.password = mdp;
     }
+    
+    public void setReq(int indice, int value) {
+		this.req.add(indice, value);
+	}
+    
 
     //FUNCTION//
     public void addPoint(int nbr){

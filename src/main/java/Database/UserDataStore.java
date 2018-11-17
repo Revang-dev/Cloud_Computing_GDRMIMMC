@@ -59,7 +59,7 @@ public class UserDataStore {
         QueryResults<Entity> datastore_users = datastore.run(datastore_query);
         while (datastore_users.hasNext()) {
             Entity potencial_user = datastore_users.next();
-            Users newUser = new Users(potencial_user.getString(Users.EMAIL), potencial_user.getString(Users.PASSWORD), Integer.parseInt(potencial_user.getString(Users.POINT)), potencial_user.getString(Users.LEVEL));
+            Users newUser = new Users(potencial_user.getString(Users.EMAIL), potencial_user.getString(Users.PASSWORD), Integer.parseInt(potencial_user.getString(Users.POINT)), potencial_user.getString(Users.LEVEL), potencial_user.getList("requetes"));
             res.add(newUser);
         }
         return res;
@@ -88,7 +88,26 @@ public class UserDataStore {
         while (datastore_users.hasNext()) {
             potencial_user = datastore_users.next();
             if (mail.equals(potencial_user.getString(Users.EMAIL)) && mdp.equals(potencial_user.getString(Users.PASSWORD))) {
-                res = new Users(potencial_user.getString(Users.EMAIL), potencial_user.getString(Users.PASSWORD), potencial_user.getLong(Users.POINT), potencial_user.getString(Users.LEVEL));
+                res = new Users(potencial_user.getString(Users.EMAIL), potencial_user.getString(Users.PASSWORD), potencial_user.getLong(Users.POINT), potencial_user.getString(Users.LEVEL), potencial_user.getList("requetes"));
+            }
+        }
+
+        return res;
+    }
+    
+    public static Users getUser(String mail){
+        Users res = null;
+        Entity potencial_user;
+
+        EntityQuery datastore_query = Query.newEntityQueryBuilder()
+                .setKind("User2")
+                .build();
+        QueryResults<Entity> datastore_users = datastore.run(datastore_query);
+
+        while (datastore_users.hasNext()) {
+            potencial_user = datastore_users.next();
+            if (mail.equals(potencial_user.getString(Users.EMAIL))) {
+                res = new Users(potencial_user.getString(Users.EMAIL), potencial_user.getString(Users.PASSWORD), potencial_user.getLong(Users.POINT), potencial_user.getString(Users.LEVEL), potencial_user.getList("requetes"));
             }
         }
 
