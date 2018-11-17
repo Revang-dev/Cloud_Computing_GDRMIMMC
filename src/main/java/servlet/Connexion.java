@@ -50,7 +50,6 @@ public class Connexion extends HttpServlet {
 			JsonElement obj = jparser.parse(jb.toString());
 			JsonObject jsontest = obj.getAsJsonObject();
 			Users user = null;
-			out.print("ok");
 			if (jsontest.get("Action").getAsString().equals("Connexion")) {
 				JsonObject body = (JsonObject) jsontest.get("Body");
 				String email = body.get("userID").getAsString();
