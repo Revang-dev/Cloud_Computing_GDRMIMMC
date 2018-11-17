@@ -30,6 +30,10 @@
         <servlet-name>main</servlet-name>
         <servlet-class>servlet.MainPage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deletegestion</servlet-name>
+        <servlet-class>servlet.DeleteFileGestion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>main</servlet-name>
         <url-pattern>/main</url-pattern>
@@ -53,6 +57,10 @@
     <servlet-mapping>
         <servlet-name>demo</servlet-name>
         <url-pattern>/demo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deletegestion</servlet-name>
+        <url-pattern>/deletegestion</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>mainpage.jsp</welcome-file>

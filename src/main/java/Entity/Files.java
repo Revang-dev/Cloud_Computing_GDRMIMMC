@@ -10,7 +10,7 @@ public class Files {
     private String emailUtilisateur;
     private String url;
     private double weight;
-    private String dateCreation;
+    private long dateCreation;
     private String type;
     private int id;
     private String statut;
@@ -34,8 +34,7 @@ public class Files {
         this.name = name;
         this.id = 0;
         this.statut = "Alive";
-        this.dateCreation = DateFormat.getDateTimeInstance(DateFormat.SHORT,
-                DateFormat.SHORT).format(new Date());
+        this.dateCreation = System.currentTimeMillis();
     }
 
     //GETTER//
@@ -51,7 +50,7 @@ public class Files {
         return this.weight;
     }
 
-    public String getDateCreation(){
+    public long getDateCreation(){
         return this.dateCreation;
     }
 
@@ -84,7 +83,7 @@ public class Files {
         this.weight = data;
     }
 
-    public void setDateCreation(String data){
+    public void setDateCreation(long data){
         this.dateCreation = data;
     }
 

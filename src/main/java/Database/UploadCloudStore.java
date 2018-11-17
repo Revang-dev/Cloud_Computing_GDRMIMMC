@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 public class UploadCloudStore {
     private static Storage storage = null;
-    private String bucket = "brave-sonar-218511.appspot.com/";
+    private String bucket = "brave-sonar-218511.appspot.com";
 
     static {
         storage = StorageOptions.getDefaultInstance().getService();
