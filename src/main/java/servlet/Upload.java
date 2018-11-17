@@ -6,6 +6,7 @@ import Database.UploadCloudStore;
 import Database.UserDataStore;
 import Entity.Files;
 import Entity.Users;
+import mail.MailSender;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -92,6 +93,7 @@ import java.nio.file.Paths;
                                     break;
                                 } else {
                                     out.println("NOOOOOOOB");
+                                    MailSender.SendLinkTo(user.getEmail(), "lol non noob");
                                     break;
                                 }
 

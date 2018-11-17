@@ -11,10 +11,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-/**
- *
- * @author doraemon
- */
+
 public class GoogleMail {
     private GoogleMail() {
     }
