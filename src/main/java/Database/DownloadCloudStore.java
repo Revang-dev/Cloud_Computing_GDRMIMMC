@@ -40,7 +40,7 @@ public class DownloadCloudStore {
 
         BlobInfo blobInfo = storage.get(BlobId.of(bucket, blobName));
         URL signedUrl = storage.signUrl(BlobInfo.newBuilder(bucket, blobName).build(), 
-                5, TimeUnit.HOURS, SignUrlOption.signWith(ServiceAccountCredentials.fromStream(
+                5, TimeUnit.MINUTES, SignUrlOption.signWith(ServiceAccountCredentials.fromStream(
                 new FileInputStream(blobInfo.getMediaLink()))));
         MailSender.SendLinkTo(user.getEmail(), signedUrl.toString());
         
