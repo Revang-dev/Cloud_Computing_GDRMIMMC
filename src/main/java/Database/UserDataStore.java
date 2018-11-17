@@ -56,7 +56,12 @@ public class UserDataStore {
         QueryResults<Entity> datastore_users = datastore.run(datastore_query);
         while (datastore_users.hasNext()) {
             Entity potencial_user = datastore_users.next();
-            Users newUser = new Users(potencial_user.getString(Users.EMAIL), potencial_user.getString(Users.PASSWORD), Integer.parseInt(potencial_user.getString(Users.POINT)), potencial_user.getString(Users.LEVEL), potencial_user.getString(Users.REQUETES));
+            String email = potencial_user.getString(Users.EMAIL);
+            String password = potencial_user.getString(Users.PASSWORD);
+            long point = potencial_user.getLong(Users.POINT);
+            String level = potencial_user.getString(Users.LEVEL);
+            String requests =  potencial_user.getString(Users.REQUETES);
+            Users newUser = new Users(email, password, point, level, requests);
             res.add(newUser);
         }
         return res;

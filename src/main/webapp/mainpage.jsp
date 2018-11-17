@@ -58,6 +58,36 @@
         var fichier;
         var length;
 
+
+        function postaccount() {
+                   var xhr = new XMLHttpRequest();
+                   var url = "https://cloudprojetmomo.appspot.com/creation";
+                   xhr.open("POST", url, true);
+                   xhr.setRequestHeader("Content-type", "application/json");
+                   var data = JSON.stringify({ "Action" : "addUser", "Body": { "userID":document.getElementById('username').value, "pass": document.getElementById('mdp').value } });
+                   xhr.send(data);
+                   xhr.onreadystatechange = function() {
+                       if (this.readyState == 4 && this.status == 200) {
+                           alert(this.responseText);
+                       }
+                   };
+               }
+
+
+         function postaccountrank() {
+                            var xhr = new XMLHttpRequest();
+                            var url = "https://cloudprojetmomo.appspot.com/creation";
+                            xhr.open("POST", url, true);
+                            xhr.setRequestHeader("Content-type", "application/json");
+                            var data = JSON.stringify({ "Action" : "addUser", "Body": { "userID":document.getElementById('username').value, "pass": document.getElementById('mdp').value, "level": document.getElementById('rank').value } });
+                            xhr.send(data);
+                            xhr.onreadystatechange = function() {
+                                if (this.readyState == 4 && this.status == 200) {
+                                    alert(this.responseText);
+                                }
+                            };
+                        }
+
      </script>
 </head>
 

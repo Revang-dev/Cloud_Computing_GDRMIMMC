@@ -15,33 +15,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-public class CreationUser extends HttpServlet{
+public class CreationUserRank extends HttpServlet{
     UserDataStore userManager = UserDataStore.getInstance();
-    //////////////////////__JSON__///////////////////////////////
-    /*
-    {Action: “addUser”,
-        Body: {
-            userID: Bob@gmail.com,
-            pass: password
-        }
-    }
-    {Action: “deleteUser”,
-        Body: {
-            userID: Bob@gmail.com
-        }
-    }
-    */
-    /////////////////////////////////////////////////////////////
 
-    /*@Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        // Set response content type
-        resp.setContentType("text/html");
-
-        // Actual logic goes here.
-        PrintWriter out = resp.getWriter();
-        out.println("<h1>" + "Yo" + "</h1>");
-    }*/
+    
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -59,18 +36,15 @@ public class CreationUser extends HttpServlet{
             JsonParser jparser = new JsonParser();
             JsonElement obj = jparser.parse(jb.toString());
             JsonObject jsontest = obj.getAsJsonObject();
-            if(jsontest.get("Action").getAsString().equals("addUser")) {
-                JsonObject body = (JsonObject) jsontest.get("Body");
-                String username = body.get("userID").getAsString();
-                String level = "Noob";
-                if(body.get("level") != null ){
-                    level = body.get("level").getAsString();
-                }
-                String mdp = body.get("pass").getAsString();
-                Users newAccount = new Users(username, mdp, level);
-                userManager.addUser(newAccount);
-                out.println(newAccount.toString());
+            String username = jsontest.get("username").getAsString();
+            String level = "Noob";
+            if(jsontest.get("level") != null ){
+                    level = jsontest.get("level").getAsString();
             }
+            String mdp = jsontest.get("mdp").getAsString();
+            Users newAccount = new Users(username, mdp, level);
+            userManager.addUser(newAccount);
+            out.println(newAccount.toString());
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -78,15 +52,19 @@ public class CreationUser extends HttpServlet{
         }
     }
 
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         PrintWriter out = resp.getWriter();
+        System.out.print("______momomomo_____");
         ArrayList<Users> list = userManager.getAllUser();
+        System.out.print(list);
         for(Users usr : list){
-            out.println("--------\n");
+            out.println("----------------------------------------------------\n");
             out.println(usr.toString()+"\n");
-            out.println("--------\n");
+            out.println("----------------------------------------------------\n");
         }
     }
+
 
 }

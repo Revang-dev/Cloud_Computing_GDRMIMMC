@@ -24,7 +24,6 @@ public class Users {
 
     public  Users(String newEmail,String mdp, String level){
         this.email = newEmail;
-        this.level = "Noob";
         this.point = 0;
         this.password = mdp;
         this.level = level;
