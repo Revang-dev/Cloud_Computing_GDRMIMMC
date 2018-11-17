@@ -5,7 +5,6 @@ public class Users {
     private long point;
     private String level;
     private String password;
-    private int id;
     //[START keys]
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
@@ -18,7 +17,6 @@ public class Users {
         this.level = "Noob";
         this.point = 0;
         this.password = mdp;
-        this.id = 0;
     }
     
     public  Users(String newEmail,String mdp, long point, String level){
@@ -26,7 +24,6 @@ public class Users {
         this.level = level;
         this.point = point;
         this.password = mdp;
-        this.id = 0;
     }
 
 
@@ -35,7 +32,6 @@ public class Users {
         this.level = "Noob";
         this.point = 0;
         this.password = mdp;
-        this.id = 0;
         this.level = level;
     }
 
@@ -56,9 +52,6 @@ public class Users {
         return this.password;
     }
 
-    public int getId(){
-        return this.id;
-    }
     //SETTER//
     public void setEmail(String newEmail){
         this.email = newEmail;
@@ -74,10 +67,6 @@ public class Users {
 
     public void setPassword(String mdp){
         this.password = mdp;
-    }
-
-    public void setId(int newID){
-        this.id = newID;
     }
 
     //FUNCTION//

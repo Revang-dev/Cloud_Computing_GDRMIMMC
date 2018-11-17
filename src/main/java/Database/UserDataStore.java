@@ -29,15 +29,28 @@ public class UserDataStore {
     }
 
 
-    public static void updateUser(Users user){
-        Key key = keyFactory.newKey(user.getId());
-        Entity entity = Entity.newBuilder(key)
-                .set(Users.EMAIL, user.getEmail())
-                .set(Users.PASSWORD, user.getPassword())
-                .set(Users.LEVEL, user.getLevel())
-                .set(Users.POINT, user.getPoint())
+    public static void updateUser(Users user) {
+        Users res = null;
+        Entity potencial_user;
+
+        EntityQuery datastore_query = Query.newEntityQueryBuilder()
+                .setKind("User2")
                 .build();
-        datastore.update(entity);
+        QueryResults<Entity> datastore_users = datastore.run(datastore_query);
+
+        while (datastore_users.hasNext()) {
+            potencial_user = datastore_users.next();
+            if (user.getEmail().equals(potencial_user.getString(Users.EMAIL))) {
+                Entity entity = Entity.newBuilder(potencial_user)
+                        .set(Users.EMAIL, user.getEmail())
+                        .set(Users.PASSWORD, user.getPassword())
+                        .set(Users.LEVEL, user.getLevel())
+                        .set(Users.POINT, user.getPoint())
+                        .build();
+                datastore.update(entity);
+                return;
+            }
+        }
     }
 
     public static ArrayList<Users> getAllUser(){

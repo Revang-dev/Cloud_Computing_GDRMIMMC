@@ -9,7 +9,13 @@ public class EmptyFileGenerator {
 	
 	public static void CreateFile(long size, String fileName) throws IOException {
 		RandomAccessFile f = new RandomAccessFile(fileName, "rw");
-        f.setLength(size);
+        f.setLength(size*KILO);
 	}
-	
+
+	public static void main(String[] args) throws IOException {
+		CreateFile(5,"test1");
+	}
+
 }
+
+
