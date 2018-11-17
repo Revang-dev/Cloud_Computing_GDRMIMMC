@@ -1,8 +1,7 @@
 package servlet;
 
-import Database.DownloadCloudStore;
 import Database.FileDataStore;
-import Database.UploadCloudStore;
+import Database.CloudStore;
 import Database.UserDataStore;
 import Entity.Files;
 import Entity.Users;
@@ -18,14 +17,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Paths;
 
-    public class Upload extends HttpServlet {
+public class Upload extends HttpServlet {
         FileDataStore fileManager = FileDataStore.getInstance();
-        UploadCloudStore cloud = new UploadCloudStore();
+        CloudStore cloud = new CloudStore();
         UserDataStore userStore = UserDataStore.getInstance();
         //////////////////////__JSON__///////////////////////////////
     /*

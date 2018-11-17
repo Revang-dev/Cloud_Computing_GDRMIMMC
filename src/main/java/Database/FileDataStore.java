@@ -69,7 +69,33 @@ public class FileDataStore {
         return res;
     }
 
-    public static Files getFile(int id){
+    public static void deleteFile(String url){
+        Files res = null;
+        Entity potencial_file;
+        EntityQuery datastore_query = Query.newEntityQueryBuilder()
+                .setKind("File2")
+                .build();
+        QueryResults<Entity> datastore_files = datastore.run(datastore_query);
+        while (datastore_files.hasNext()) {
+            potencial_file = datastore_files.next();
+            if (url.equals(potencial_file.getString(Files.URL))) {
+                datastore.delete(potencial_file.getKey());
+            }
+        }
+    }
+
+    public static void deleteAll(){
+        EntityQuery datastore_query = Query.newEntityQueryBuilder()
+                .setKind("File2")
+                .build();
+        QueryResults<Entity> datastore_files = datastore.run(datastore_query);
+        while (datastore_files.hasNext()) {
+            Entity potencial_file = datastore_files.next();
+            datastore.delete(potencial_file.getKey());
+        }
+    }
+
+    public static Files getFile(String url){
         Files res = null;
         Entity potencial_file;
 
@@ -80,7 +106,7 @@ public class FileDataStore {
 
         while (datastore_files.hasNext()) {
             potencial_file = datastore_files.next();
-            if (Integer.toString(id).equals(potencial_file.getString(Files.ID))) {
+            if (url.equals(potencial_file.getString(Files.URL))) {
                 res = new Files(potencial_file.getString(Files.EMAIL), potencial_file.getString(Files.NAME),potencial_file.getString(Files.URL), Double.parseDouble(potencial_file.getString(Files.WEIGHT)), potencial_file.getString(Files.TYPE));
             }
         }

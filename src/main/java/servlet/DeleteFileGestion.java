@@ -1,6 +1,6 @@
 package servlet;
 
-import Database.DeleteCloudStore;
+import Database.CloudStore;
 import Database.FileDataStore;
 import Database.UserDataStore;
 import Entity.Files;
@@ -19,7 +19,7 @@ public class DeleteFileGestion extends HttpServlet{
 
     FileDataStore fileStore = FileDataStore.getInstance();
     UserDataStore userStore = UserDataStore.getInstance();
-    DeleteCloudStore deletor = new DeleteCloudStore();
+    CloudStore deletor = new CloudStore();
 
 
     @Override

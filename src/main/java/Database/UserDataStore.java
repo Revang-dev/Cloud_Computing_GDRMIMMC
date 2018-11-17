@@ -67,6 +67,34 @@ public class UserDataStore {
         return res;
     }
 
+    public static void deleteUser(String mail){
+        Users res = null;
+        Entity potencial_user;
+
+        EntityQuery datastore_query = Query.newEntityQueryBuilder()
+                .setKind("User2")
+                .build();
+        QueryResults<Entity> datastore_users = datastore.run(datastore_query);
+
+        while (datastore_users.hasNext()) {
+            potencial_user = datastore_users.next();
+            if (mail.equals(potencial_user.getString(Users.EMAIL))) {
+                datastore.delete(potencial_user.getKey());
+            }
+        }
+    }
+
+    public static void deleteAll() {
+        EntityQuery datastore_query = Query.newEntityQueryBuilder()
+                .setKind("User2")
+                .build();
+        QueryResults<Entity> datastore_users = datastore.run(datastore_query);
+        while (datastore_users.hasNext()) {
+            Entity potencial_user = datastore_users.next();
+            datastore.delete(potencial_user.getKey());
+        }
+    }
+
     public static void addUser(Users user){
         IncompleteKey key = keyFactory.newKey();
         FullEntity<IncompleteKey> userData = Entity.newBuilder(key)

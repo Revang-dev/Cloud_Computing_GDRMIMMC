@@ -6,7 +6,6 @@
     </queue>
     <queue>
       <name>casualleet</name>
-      <rate>10/s</rate>
       <mode>pull</mode>
     </queue>
     <queue>

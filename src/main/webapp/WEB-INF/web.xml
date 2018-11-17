@@ -34,6 +34,10 @@
         <servlet-name>deletegestion</servlet-name>
         <servlet-class>servlet.DeleteFileGestion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>purge</servlet-name>
+        <servlet-class>servlet.Purge</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>main</servlet-name>
         <url-pattern>/main</url-pattern>
@@ -61,6 +65,10 @@
     <servlet-mapping>
         <servlet-name>deletegestion</servlet-name>
         <url-pattern>/deletegestion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+         <servlet-name>purge</servlet-name>
+         <url-pattern>/purge</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>mainpage.jsp</welcome-file>
