@@ -65,15 +65,17 @@ public class Upload extends HttpServlet {
             byte[] file = java.nio.file.Files.readAllBytes(Paths.get(fileURL));
             String type = jsontest.get("type").getAsString();
             String trueUrl = fileURL + cloud.uploadFile(name,file);
-            
             Users user = UserDataStore.getUser(email);
-            int time = (int) System.currentTimeMillis();
+            
             if (user != null) {
+            	long time = System.currentTimeMillis();
+            	String[] tab_req = user.getReq().split(",");
             	switch(user.getLevel()) {
             	
             	case "Noob":
-            		if (time - user.getReq(0) > 60000) {
-            			user.setReq(0, time);
+            		if (time - Long.parseLong(tab_req[0]) > 60000) {
+            			tab_req[0] = "" + time;
+            			user.setReq(tab_req[0]+",0,0,0");
             			fileManager.addFile(new Files(email, name, trueUrl, taille, type));
             		}
             		else {
@@ -82,8 +84,9 @@ public class Upload extends HttpServlet {
             	
             	case "Casual":
             		for (int i = 0; i < 2; i++) {
-            			if (time - user.getReq(i) > 60000) {
-                			user.setReq(i, time);
+            			if (time - Long.parseLong(tab_req[i]) > 60000) {
+            				tab_req[i] = "" + time;
+            				user.setReq(tab_req[0]+","+tab_req[1]+",0,0");
                 			fileManager.addFile(new Files(email, name, trueUrl, taille, type));
                 			break;
                 		}
@@ -91,8 +94,9 @@ public class Upload extends HttpServlet {
             	
             	case "Leet":
             		for (int i = 0; i < 4; i++) {
-            			if (time - user.getReq(i) > 60000) {
-                			user.setReq(i, time);
+            			if (time - Long.parseLong(tab_req[i]) > 60000) {
+            				tab_req[i] = "" + time;
+            				user.setReq(tab_req[0]+","+tab_req[1]+","+tab_req[2]+","+tab_req[3]);
                 			fileManager.addFile(new Files(email, name, trueUrl, taille, type));
                 			break;
                 		}

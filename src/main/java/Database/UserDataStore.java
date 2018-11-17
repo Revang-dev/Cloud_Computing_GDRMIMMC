@@ -1,10 +1,6 @@
 package Database;
 
 import Entity.Users;
-import com.google.cloud.storage.Acl;
-import utils.JsonGenerator;
-
-import com.google.appengine.repackaged.com.google.gson.JsonObject;
 import com.google.cloud.datastore.*;
 
 import java.util.ArrayList;
@@ -44,6 +40,7 @@ public class UserDataStore {
                         .set(Users.PASSWORD, user.getPassword())
                         .set(Users.LEVEL, user.getLevel())
                         .set(Users.POINT, user.getPoint())
+                        .set(Users.REQUETES, user.getReq())
                         .build();
                 datastore.update(entity);
                 return;
@@ -59,7 +56,7 @@ public class UserDataStore {
         QueryResults<Entity> datastore_users = datastore.run(datastore_query);
         while (datastore_users.hasNext()) {
             Entity potencial_user = datastore_users.next();
-            Users newUser = new Users(potencial_user.getString(Users.EMAIL), potencial_user.getString(Users.PASSWORD), Integer.parseInt(potencial_user.getString(Users.POINT)), potencial_user.getString(Users.LEVEL), potencial_user.getList("requetes"));
+            Users newUser = new Users(potencial_user.getString(Users.EMAIL), potencial_user.getString(Users.PASSWORD), Integer.parseInt(potencial_user.getString(Users.POINT)), potencial_user.getString(Users.LEVEL), potencial_user.getString(Users.REQUETES));
             res.add(newUser);
         }
         return res;
@@ -72,6 +69,7 @@ public class UserDataStore {
                 .set(Users.LEVEL,user.getLevel())
                 .set(Users.POINT,user.getPoint())
                 .set(Users.PASSWORD,user.getPassword())
+                .set(Users.REQUETES, user.getReq())
                 .build();
         Entity newUser = datastore.add(userData);
     }
@@ -88,7 +86,7 @@ public class UserDataStore {
         while (datastore_users.hasNext()) {
             potencial_user = datastore_users.next();
             if (mail.equals(potencial_user.getString(Users.EMAIL)) && mdp.equals(potencial_user.getString(Users.PASSWORD))) {
-                res = new Users(potencial_user.getString(Users.EMAIL), potencial_user.getString(Users.PASSWORD), potencial_user.getLong(Users.POINT), potencial_user.getString(Users.LEVEL), potencial_user.getList("requetes"));
+                res = new Users(potencial_user.getString(Users.EMAIL), potencial_user.getString(Users.PASSWORD), potencial_user.getLong(Users.POINT), potencial_user.getString(Users.LEVEL), potencial_user.getString(Users.REQUETES));
             }
         }
 
@@ -107,7 +105,7 @@ public class UserDataStore {
         while (datastore_users.hasNext()) {
             potencial_user = datastore_users.next();
             if (mail.equals(potencial_user.getString(Users.EMAIL))) {
-                res = new Users(potencial_user.getString(Users.EMAIL), potencial_user.getString(Users.PASSWORD), potencial_user.getLong(Users.POINT), potencial_user.getString(Users.LEVEL), potencial_user.getList("requetes"));
+                res = new Users(potencial_user.getString(Users.EMAIL), potencial_user.getString(Users.PASSWORD), potencial_user.getLong(Users.POINT), potencial_user.getString(Users.LEVEL), potencial_user.getString("requetes"));
             }
         }
 

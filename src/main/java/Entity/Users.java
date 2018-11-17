@@ -1,21 +1,17 @@
 package Entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.google.cloud.datastore.Value;
-
 public class Users {
     private String email;
     private long point;
     private String level;
     private String password;
-    private ArrayList<Integer> req;
+    private String req;
     //[START keys]
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String LEVEL = "level";
     public static final String POINT = "point";
+    public static final String REQUETES = "req";
     // [END keys]
 
     public  Users(String newEmail,String mdp){
@@ -23,10 +19,7 @@ public class Users {
         this.level = "Noob";
         this.point = 0;
         this.password = mdp;
-        this.req = new ArrayList<Integer>();
-        for (int i = 0; i < 4; i++) {
-        	this.req.add((int) (System.currentTimeMillis() - 60000)); // 60000 = 1 minute
-        }
+        this.req = "0,0,0,0";
     }
 
     public  Users(String newEmail,String mdp, String level){
@@ -35,19 +28,16 @@ public class Users {
         this.point = 0;
         this.password = mdp;
         this.level = level;
-        this.req = new ArrayList<Integer>();
-        for (int i = 0; i < 4; i++) {
-        	this.req.add((int) (System.currentTimeMillis() - 60000)); // 60000 = 1 minute
-        }
+        this.req = "0,0,0,0";
     }
     
     @SuppressWarnings("unchecked")
-	public  Users(String newEmail,String mdp, long point, String level, List<Value<?>> req){
+	public  Users(String newEmail,String mdp, long point, String level, String req){
         this.email = newEmail;
         this.level = level;
         this.point = point;
         this.password = mdp;
-        this.req = (ArrayList<Integer>) (ArrayList<?>) req;
+        this.req = req;
     }
 
     //GETTER//
@@ -67,8 +57,8 @@ public class Users {
         return this.password;
     }
     
-    public long getReq(int i) {
-		return req.get(i);
+    public String getReq() {
+		return req;
 	}
 
     //SETTER//
@@ -88,8 +78,8 @@ public class Users {
         this.password = mdp;
     }
     
-    public void setReq(int indice, int value) {
-		this.req.add(indice, value);
+    public void setReq(String req) {
+		this.req = req;
 	}
     
 
