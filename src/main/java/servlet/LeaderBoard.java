@@ -9,6 +9,8 @@ import Database.UserDataStore;
 import Entity.Users;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -30,6 +32,13 @@ public class LeaderBoard extends HttpServlet {
 			}
 		});
     	users = users.subList(0, 9);
+
+		PrintWriter out = resp.getWriter();
+		for(Users usr : users){
+			out.println("--------\n");
+			out.println(usr.toString()+"\n");
+			out.println("--------\n");
+		}
     	
     }
 

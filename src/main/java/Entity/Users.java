@@ -24,9 +24,15 @@ public class Users {
 
     public  Users(String newEmail,String mdp, String level){
         this.email = newEmail;
-        this.point = 0;
         this.password = mdp;
         this.level = level;
+        if(level.equals("Leet")){
+            this.point = 200;
+        }else if(level.equals("Casual")){
+            this.point = 100;
+        }else{
+            this.point = 0;
+        }
         this.req = "0,0,0,0";
     }
     
