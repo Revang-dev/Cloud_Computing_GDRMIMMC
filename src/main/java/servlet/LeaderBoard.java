@@ -26,7 +26,7 @@ public class LeaderBoard extends HttpServlet {
 
 			@Override
 			public int compare(Users o1, Users o2) {
-				return -Integer.compare(o1.getPoint(), o2.getPoint());
+				return -Long.compare(o1.getPoint(), o2.getPoint());
 			}
 		});
     	users = users.subList(0, 9);

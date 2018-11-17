@@ -2,7 +2,7 @@ package Entity;
 
 public class Users {
     private String email;
-    private int point;
+    private long point;
     private String level;
     private String password;
     private int id;
@@ -21,7 +21,7 @@ public class Users {
         this.id = 0;
     }
     
-    public  Users(String newEmail,String mdp, int point, String level){
+    public  Users(String newEmail,String mdp, long point, String level){
         this.email = newEmail;
         this.level = level;
         this.point = point;
@@ -48,7 +48,7 @@ public class Users {
         return this.level;
     }
 
-    public int getPoint(){
+    public long getPoint(){
         return this.point;
     }
 

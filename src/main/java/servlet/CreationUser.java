@@ -21,7 +21,8 @@ public class CreationUser extends HttpServlet{
     /*
     {Action: “addUser”,
         Body: {
-            userID: Bob@gmail.com
+            userID: Bob@gmail.com,
+            pass: password
         }
     }
     {Action: “deleteUser”,
@@ -32,7 +33,7 @@ public class CreationUser extends HttpServlet{
     */
     /////////////////////////////////////////////////////////////
 
-   /* @Override
+    /*@Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         // Set response content type
         resp.setContentType("text/html");
@@ -58,19 +59,21 @@ public class CreationUser extends HttpServlet{
             JsonParser jparser = new JsonParser();
             JsonElement obj = jparser.parse(jb.toString());
             JsonObject jsontest = obj.getAsJsonObject();
-            String username = jsontest.get("username").getAsString();
-            //String level = jsontest.get("level").getAsString();
-            String mdp = jsontest.get("mdp").getAsString();
-            Users newAccount = new Users(username, mdp);
-            userManager.addUser(newAccount);
-            out.println(newAccount.toString());
+            if(jsontest.get("Action").getAsString().equals("addUser")) {
+                JsonObject body = (JsonObject) jsontest.get("Body");
+                String username = body.get("userID").getAsString();
+                //String level = body.get("level").getAsString();
+                String mdp = body.get("pass").getAsString();
+                Users newAccount = new Users(username, mdp);
+                userManager.addUser(newAccount);
+                out.println(newAccount.toString());
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
             out.println(e.toString());
         }
     }
-
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -82,6 +85,5 @@ public class CreationUser extends HttpServlet{
             out.println("----------------------------------------------------\n");
         }
     }
-
 
 }

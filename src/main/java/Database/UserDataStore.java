@@ -1,6 +1,7 @@
 package Database;
 
 import Entity.Users;
+import com.google.cloud.storage.Acl;
 import utils.JsonGenerator;
 
 import com.google.appengine.repackaged.com.google.gson.JsonObject;
@@ -75,8 +76,8 @@ public class UserDataStore {
 
         while (datastore_users.hasNext()) {
             potencial_user = datastore_users.next();
-            if (mail.equals(potencial_user.getString("mail")) && mdp.equals(potencial_user.getString("pass"))) {
-                res = new Users(potencial_user.getString("mail"), potencial_user.getString("password"), Integer.parseInt(potencial_user.getString("point")), potencial_user.getString("level"));
+            if (mail.equals(potencial_user.getString(Users.EMAIL)) && mdp.equals(potencial_user.getString(Users.PASSWORD))) {
+                res = new Users(potencial_user.getString(Users.EMAIL), potencial_user.getString(Users.PASSWORD), potencial_user.getLong(Users.POINT), potencial_user.getString(Users.LEVEL));
             }
         }
 
