@@ -55,15 +55,15 @@ public class FileDataStore {
         Entity newFile = datastore.add(fileData);
     }
 
-    public static ArrayList<Entity.Files> getAllFile(){
-        ArrayList<Entity.Files> res = new ArrayList<>();
+    public static ArrayList<Files> getAllFile(){
+        ArrayList<Files> res = new ArrayList<>();
         EntityQuery datastore_query = Query.newEntityQueryBuilder()
                 .setKind("File2")
                 .build();
         QueryResults<Entity> datastore_files = datastore.run(datastore_query);
         while (datastore_files.hasNext()) {
             Entity potencial_file = datastore_files.next();
-            Entity.Files newFile = new Files(potencial_file.getString(Files.EMAIL), potencial_file.getString(Files.NAME),potencial_file.getString(Files.URL), Double.parseDouble(potencial_file.getString(Files.WEIGHT)), potencial_file.getString(Files.TYPE));
+            Files newFile = new Files(potencial_file.getString(Files.EMAIL), potencial_file.getString(Files.NAME),potencial_file.getString(Files.URL), Double.parseDouble(potencial_file.getString(Files.WEIGHT)), potencial_file.getString(Files.TYPE));
             res.add(newFile);
         }
         return res;
