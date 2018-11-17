@@ -84,6 +84,10 @@ import java.nio.file.Paths;
                                     String trueUrl = "" + cloud.uploadFile(name, file);
                                     fileManager.addFile(new Files(email, name, trueUrl, taille, type));
                                     out.println("FILE POSTED ON :" + trueUrl);
+                                    user.setPoint(user.getPoint() + (long) taille);
+                                    if (user.getPoint() > 100) {
+                                    	user.levelUp();
+                                    }
                                     userStore.updateUser(user);
                                     break;
                                 } else {
@@ -100,6 +104,10 @@ import java.nio.file.Paths;
                                         String trueUrl = "" + cloud.uploadFile(name, file);
                                         fileManager.addFile(new Files(email, name, trueUrl, taille, type));
                                         out.println("FILE POSTED ON :" + trueUrl);
+                                        user.setPoint(user.getPoint() + (long) taille);
+                                        if (user.getPoint() > 200) {
+                                        	user.levelUp();
+                                        }
                                         userStore.updateUser(user);
                                         break;
                                     }
@@ -114,6 +122,7 @@ import java.nio.file.Paths;
                                         String trueUrl = "" + cloud.uploadFile(name, file);
                                         fileManager.addFile(new Files(email, name, trueUrl, taille, type));
                                         out.println("FILE POSTED ON :" + trueUrl);
+                                        user.setPoint(user.getPoint() + (long) taille);
                                         userStore.updateUser(user);
                                         break;
                                     }

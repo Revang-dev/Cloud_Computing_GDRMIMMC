@@ -75,7 +75,7 @@ public class Users {
         this.level = thisLevel;
     }
 
-    public void setPoint(int nbr){
+    public void setPoint(long nbr){
         this.point = nbr;
     }
 
