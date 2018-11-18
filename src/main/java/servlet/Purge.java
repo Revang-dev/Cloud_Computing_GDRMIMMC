@@ -20,8 +20,11 @@ public class Purge extends HttpServlet{
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         PrintWriter out = resp.getWriter();
         cloud.deleteAll(fileManager.getAllFile());
+        out.print("All files deleted from Cloud store");
         fileManager.deleteAll();
+        out.print("All files deleted from Data store");
         userStore.deleteAll();
+        out.print("All users deleted from Data store");
     }
 
 }

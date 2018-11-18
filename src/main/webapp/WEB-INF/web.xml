@@ -27,6 +27,18 @@
         <servlet-class>servlet.Upload</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>upload</servlet-name>
+        <servlet-class>servlet.Upload</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>noobworker</servlet-name>
+        <servlet-class>servlet.NoobWorker</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>noobdownload</servlet-name>
+        <servlet-class>servlet.NoobDownload</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>main</servlet-name>
         <servlet-class>servlet.MainPage</servlet-class>
     </servlet>
@@ -69,6 +81,14 @@
     <servlet-mapping>
          <servlet-name>purge</servlet-name>
          <url-pattern>/purge</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>noobworker</servlet-name>
+        <url-pattern>/noobworker</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>noobdownload</servlet-name>
+        <url-pattern>/ndownload</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>mainpage.jsp</welcome-file>
