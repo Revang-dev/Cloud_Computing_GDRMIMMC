@@ -35,21 +35,28 @@ public class DeleteFileGestion extends HttpServlet{
                     out.println("NOOB case");
                     if ((time - date) > 300000) {
                         deletor.deleteFile(file.getName());
-                        break;
+                        fileStore.deleteFile(file.getUrl());
+                        out.println("File deleted");
                     }
+                    break;
                 case "Casual" :
                     out.println("CASUAL case");
                     if ((time - date) > 600000) {
                         deletor.deleteFile(file.getName());
-                        break;
+                        fileStore.deleteFile(file.getUrl());
+                        out.println("File deleted");
                     }
+                    break;
                 case "Leet" :
                     out.println("LEET case");
                     if ((time - date) > 1800000) {
                         deletor.deleteFile(file.getName());
-                        break;
+                        fileStore.deleteFile(file.getUrl());
+                        out.println("File deleted");
                     }
+                    break;
             }
         }
     }
+
 }

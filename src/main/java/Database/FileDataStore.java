@@ -6,6 +6,7 @@ import utils.JsonGenerator;
 import com.google.appengine.repackaged.com.google.gson.JsonObject;
 import com.google.cloud.datastore.*;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
@@ -33,6 +34,7 @@ public class FileDataStore {
                 .set(Files.EMAIL, file.getEmailUtilisateur())
                 .set(Files.URL, file.getUrl())
                 .set(Files.WEIGHT, file.getWeight())
+                .set(Files.NAME,file.getName())
                 .set(Files.DATE, file.getDateCreation())
                 .set(Files.TYPE, file.getType())
                 .set(Files.ID, file.getId())
@@ -47,6 +49,7 @@ public class FileDataStore {
                 .set(Files.EMAIL, file.getEmailUtilisateur())
                 .set(Files.URL, file.getUrl())
                 .set(Files.WEIGHT, file.getWeight())
+                .set(Files.NAME,file.getName())
                 .set(Files.DATE, file.getDateCreation())
                 .set(Files.TYPE, file.getType())
                 .set(Files.ID, file.getId())
@@ -63,7 +66,15 @@ public class FileDataStore {
         QueryResults<Entity> datastore_files = datastore.run(datastore_query);
         while (datastore_files.hasNext()) {
             Entity potencial_file = datastore_files.next();
-            Files newFile = new Files(potencial_file.getString(Files.EMAIL), potencial_file.getString(Files.NAME),potencial_file.getString(Files.URL), Double.parseDouble(potencial_file.getString(Files.WEIGHT)), potencial_file.getString(Files.TYPE));
+            String email = potencial_file.getString(Files.EMAIL);
+            String name = potencial_file.getString(Files.NAME);
+            String url = potencial_file.getString(Files.URL);
+            double weight =  potencial_file.getDouble(Files.WEIGHT);
+            String type = potencial_file.getString(Files.TYPE);
+            long id = potencial_file.getLong(Files.ID);
+            String statut = potencial_file.getString(Files.STATUT);
+            long date = potencial_file.getLong(Files.DATE);
+            Files newFile = new Files(email, name,url,weight,type,id,statut,date);
             res.add(newFile);
         }
         return res;
@@ -107,7 +118,15 @@ public class FileDataStore {
         while (datastore_files.hasNext()) {
             potencial_file = datastore_files.next();
             if (url.equals(potencial_file.getString(Files.URL))) {
-                res = new Files(potencial_file.getString(Files.EMAIL), potencial_file.getString(Files.NAME),potencial_file.getString(Files.URL), Double.parseDouble(potencial_file.getString(Files.WEIGHT)), potencial_file.getString(Files.TYPE));
+                String email = potencial_file.getString(Files.EMAIL);
+                String name = potencial_file.getString(Files.NAME);
+                String newurl = potencial_file.getString(Files.URL);
+                double weight =  potencial_file.getDouble(Files.WEIGHT);
+                String type = potencial_file.getString(Files.TYPE);
+                long id = potencial_file.getLong(Files.ID);
+                String statut = potencial_file.getString(Files.STATUT);
+                long date = potencial_file.getLong(Files.DATE);
+                res = new Files(email, name,newurl,weight,type,id,statut,date);
             }
         }
 

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Purge extends HttpServlet{
     FileDataStore fileManager = FileDataStore.getInstance();
@@ -17,6 +18,7 @@ public class Purge extends HttpServlet{
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        PrintWriter out = resp.getWriter();
         cloud.deleteAll(fileManager.getAllFile());
         fileManager.deleteAll();
         userStore.deleteAll();
