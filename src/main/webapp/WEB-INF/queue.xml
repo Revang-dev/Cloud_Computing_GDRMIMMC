@@ -6,6 +6,6 @@
     </queue>
   <queue>
     <name>noob</name>
-    <mode>10/s</mode>
+    <rate>20/m</rate>
   </queue>
   </queue-entries>
