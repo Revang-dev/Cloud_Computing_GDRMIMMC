@@ -23,7 +23,7 @@
 
         body
         {
-            background-color : 	#00008B ;
+            background-color : 	#8B008B ;
             color : white
         }
 
