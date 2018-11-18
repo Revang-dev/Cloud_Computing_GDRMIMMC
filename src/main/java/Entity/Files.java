@@ -12,7 +12,7 @@ public class Files {
     private double weight;
     private long dateCreation;
     private String type;
-    private int id;
+    private long id;
     private String statut;
     private String name;
     //[START keys]
@@ -37,6 +37,17 @@ public class Files {
         this.dateCreation = System.currentTimeMillis();
     }
 
+    public Files(String newEmail,String name, String newUrl, double newWeight, String newType,long id, String statut, long date){
+        this.emailUtilisateur = newEmail;
+        this.url = newUrl;
+        this.weight = newWeight;
+        this.type = newType;
+        this.name = name;
+        this.id = id;
+        this.statut = statut;
+        this.dateCreation = date;
+    }
+
     //GETTER//
     public String getEmailUtilisateur(){
         return this.emailUtilisateur;
@@ -58,7 +69,7 @@ public class Files {
         return this.type;
     }
 
-    public int getId(){
+    public long getId(){
         return this.id;
     }
 
@@ -91,7 +102,7 @@ public class Files {
         this.type = data;
     }
 
-    public void setId(int data){
+    public void setId(long data){
         this.id = data;
     }
 
