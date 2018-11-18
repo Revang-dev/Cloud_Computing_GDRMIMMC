@@ -106,6 +106,32 @@ public class FileDataStore {
         }
     }
 
+    public static Files getFileByName(String fileName){
+        Files res = null;
+        Entity potencial_file;
+
+        EntityQuery datastore_query = Query.newEntityQueryBuilder()
+                .setKind("File2")
+                .build();
+        QueryResults<Entity> datastore_files = datastore.run(datastore_query);
+
+        while (datastore_files.hasNext()) {
+            potencial_file = datastore_files.next();
+            if (fileName.equals(potencial_file.getString(Files.NAME))) {
+                String email = potencial_file.getString(Files.EMAIL);
+                String name = potencial_file.getString(Files.NAME);
+                String newurl = potencial_file.getString(Files.URL);
+                double weight =  potencial_file.getDouble(Files.WEIGHT);
+                String type = potencial_file.getString(Files.TYPE);
+                long id = potencial_file.getLong(Files.ID);
+                String statut = potencial_file.getString(Files.STATUT);
+                long date = potencial_file.getLong(Files.DATE);
+                res = new Files(email, name,newurl,weight,type,id,statut,date);
+            }
+        }
+
+        return res;
+    }
     public static Files getFile(String url){
         Files res = null;
         Entity potencial_file;
