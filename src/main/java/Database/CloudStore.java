@@ -8,10 +8,7 @@ import com.google.cloud.storage.Acl.Role;
 import com.google.cloud.storage.Acl.User;
 import mail.MailSender;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,10 +44,10 @@ public class CloudStore {
                 .build().getBlobId());
     }
 
-    public void downloadFile(Users user, String blobName) throws FileNotFoundException, IOException{
+    public void downloadFile(Users user, Files blobName) throws FileNotFoundException, IOException{
 
-        BlobInfo blobInfo = storage.get(BlobId.of(bucket, blobName));
-        URL signedUrl = storage.signUrl(BlobInfo.newBuilder(bucket, blobName).build(),
+        BlobInfo blobInfo = storage.get(BlobId.of(bucket, blobName.getName()));
+        URL signedUrl = storage.signUrl(BlobInfo.newBuilder(bucket, blobName.getName()).build(),
                 5, TimeUnit.MINUTES, Storage.SignUrlOption.signWith(ServiceAccountCredentials.fromStream(
                         new FileInputStream(blobInfo.getMediaLink()))));
         MailSender.SendLinkTo(user.getEmail(), signedUrl.toString());
