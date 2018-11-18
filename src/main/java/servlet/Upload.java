@@ -67,7 +67,7 @@ public class Upload extends HttpServlet {
                     String email = body.get("userID").getAsString();
                     double taille = body.get("fileSize").getAsDouble();
                     // byte[] file = java.nio.file.Files.readAllBytes(littefile);
-                    byte[] file = gen.CreateLocalFile(5);
+                    byte[] file = gen.CreateLocalFile( body.get("fileSize").getAsInt());
                     String type = body.get("type").getAsString();
                     Users user = userStore.getUserbyMail(email);
                     String trueUrl = "";
