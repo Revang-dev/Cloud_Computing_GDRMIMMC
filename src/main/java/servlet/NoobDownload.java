@@ -49,16 +49,19 @@ public class NoobDownload extends HttpServlet{
                 String email = body.get("mail").getAsString();
                 String fileName = body.get("fileName").getAsString();
 
+                if(userManager.getUserbyMail(email).getLevel().equals("Noob")) {
+                    //NOT WORKING. CANNOT UPLOAD QUEUE.XML
+                    resultat = QueueFactory.getQueue("noob");
+                    Queue queue = QueueFactory.getDefaultQueue();
+                    resultat.add(TaskOptions.Builder.withUrl("/noobworker")
+                            .param("email", email)
+                            .param("fileName", fileName));
+                }else{
+                    out.println("you're not a noob");
+                }
 
-                //NOT WORKING. CANNOT UPLOAD QUEUE.XML
-                /*resultat = QueueFactory.getQueue("noob");
-                Queue queue = QueueFactory.getDefaultQueue();
-                resultat.add(TaskOptions.Builder.withUrl("/noobworker")
-                        .param("email", email)
-                        .param("fileName", fileName));*/
 
-
-                Users user = userManager.getUserbyMail(email);
+                /*Users user = userManager.getUserbyMail(email);
                 String[] tab_req = user.getReq().split(",");
                 permissionUpload permission = new permissionUpload(user.getLevel());
                 if(permission.canSendRequest(tab_req)) {
@@ -70,7 +73,7 @@ public class NoobDownload extends HttpServlet{
                 }else{
                     out.println("lol non, vous devez attendre 1 min avant de lancer votre prochaine requete download");
                     MailSender.SendLinkTo(user.getEmail(), "lol non, vous devez attendre 1 min avant de lancer votre prochaine requete download");
-                }
+                }*/
             }
         } catch (Exception e) {
             e.printStackTrace();
