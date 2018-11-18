@@ -9,15 +9,31 @@ Depot git du projet Cloud Computing de Mohamed Chennouf, Meersman Rudy, Duminy G
 02/11/18:
 * Couche de Donnée.pdf
 
-# Lancer le projet : 
+# Rendu final
+
+## Lancer le projet : 
 
 Se mettre à la racine du projet et lancer : 
-mvn appengine:deploy
+* mvn clean install
+* mvn appengine:deploy
 
-# Les requetes possibles:
+## Les requetes possibles:
 * La page principale
-* Le fichier à la racine contenant plusieurs requetes POSTMAN
+* Le fichier à la racine contenant plusieurs requetes POSTMAN :
+    * /purge (GET)
+    * /creation (POST)
+    * /connexion (POST)
+    * /upload (POST)
+    * /ndownload (POST)
+    * /cldownload (POST)
+    * /leaderboard (GET)
+* Lancement de la supression des fichiers expirés à l'aide d'un script **cron** avec Cloud Scheduler
 
-# Les BD
-* Consulter Google Cloud Platform -> Datastore -> pour les entitées : users et videos
-* Consulter Google Cloud Platform -> Stockage + Bucket : brave-sonar-218511... pour les entitées : users et videos
+## Les BD
+* Consulter Google Cloud Platform -> Datastore -> pour les entitées : users et info_files
+* Consulter Google Cloud Platform -> Stockage + Bucket : brave-sonar-218511... pour les entitées : files
+
+## Problèmes rencontrés
+* Le fichier queue.xml ne fesait pas la configuration des queues (on suppose un problème de détection), nous n'avons donc pas pu utiliser les queues dans le projet. (Code en commentaire)
+* Le lien de download n'a pas d'expiration car lors de la génération de lien minuté, il nous fallait la clé du blob. Chose que l'on a pas trouvé. (Implémenté mais pas appelé)
+* Le poids du fichier est limité pour le upload, on a pas eu le temps d'intégré un partitioneur de fichier.
