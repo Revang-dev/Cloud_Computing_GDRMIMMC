@@ -31,7 +31,12 @@ public class LeaderBoard extends HttpServlet {
 				return -Long.compare(o1.getPoint(), o2.getPoint());
 			}
 		});
-    	users = users.subList(0, 9);
+		if(users.size() >= 10){
+			users = users.subList(0,10);
+		}else{
+			users = users.subList(0,users.size());
+		}
+
 
 		PrintWriter out = resp.getWriter();
 		for(Users usr : users){
@@ -39,6 +44,7 @@ public class LeaderBoard extends HttpServlet {
 			out.println(usr.toString()+"\n");
 			out.println("--------\n");
 		}
+
     	
     }
 
