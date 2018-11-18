@@ -72,65 +72,39 @@ public class Upload extends HttpServlet {
                     if (user != null) {
                         String[] tab_req = user.getReq().split(",");
                         permissionUpload permission = new permissionUpload(user.getLevel());
-                        switch (user.getLevel()) {
-
-                            case "Noob" :
-                                out.println("NOOB case");
-                                if (permission.canSendRequest(tab_req)) {
-                                    tab_req = permission.tab_reqUpadted(tab_req);
+                        int nbrequest = 1 ;
+                        if (permission.canSendRequest(tab_req)) {
+                            tab_req = permission.tab_reqUpadted(tab_req);
+                            switch (user.getLevel()) {
+                                case "Noob":
+                                    out.println("NOOB case");
                                     user.setReq(tab_req[0] + ",0,0,0");
-                                    String trueUrl = "" + cloud.uploadFile(name, file);
-                                    fileManager.addFile(new Files(email, name, trueUrl, taille, type));
-                                    out.println("FILE POSTED ON :" + trueUrl);
-                                    user.setPoint(user.getPoint() + (long) taille);
-                                    userStore.updateUser(user);
-                                    out.println(" ----Upload is successful---- ");
                                     break;
-                                } else {
-                                    out.println("lol non noob");
-                                    MailSender.SendLinkTo(user.getEmail(), "lol non noob");
-                                    break;
-                                }
-                            case "Casual":
-                                out.println("CASUAL case");
-                                if(permission.canSendRequest(tab_req)) {
-                                    tab_req = permission.tab_reqUpadted(tab_req);
+                                case "Casual":
+                                    nbrequest = 2;
+                                    out.println("Casual case");
                                     user.setReq(tab_req[0] + "," + tab_req[1] + ",0,0");
-                                    String trueUrl = "" + cloud.uploadFile(name, file);
-                                    fileManager.addFile(new Files(email, name, trueUrl, taille, type));
-                                    out.println("FILE POSTED ON :" + trueUrl);
-                                    user.setPoint(user.getPoint() + (long) taille);
-                                    userStore.updateUser(user);
-                                    out.println(" ----Upload is successful---- ");
                                     break;
-                                }else {
-                                    out.println("lol tu peux pas envoyer plus de 2 requetes en moins de 1 min");
-                                    break;
-                                }
-
-                            case "Leet":
-                                out.println("LEET case");
-                                if (permission.canSendRequest(tab_req)) {
-                                    tab_req = permission.tab_reqUpadted(tab_req);
+                                case "Leet":
+                                    nbrequest = 4;
+                                    out.println("LEET case");
                                     user.setReq(tab_req[0] + "," + tab_req[1] + "," + tab_req[2] + "," + tab_req[3]);
-                                    String trueUrl = "" + cloud.uploadFile(name, file);
-                                    fileManager.addFile(new Files(email, name, trueUrl, taille, type));
-                                    out.println("FILE POSTED ON :" + trueUrl);
-                                    user.setPoint(user.getPoint() + (long) taille);
-                                    userStore.updateUser(user);
-                                    out.println(" ----Upload is successful---- ");
                                     break;
-                                }else {
-                                    out.println("lol tu peux pas envoyer plus de 4 requetes en moins de 1 min");
-                                    break;
-                                }
+                            }
+                            String trueUrl = "" + cloud.uploadFile(name, file);
+                            fileManager.addFile(new Files(email, name, trueUrl, taille, type));
+                            out.println("FILE POSTED ON :" + trueUrl);
+                            user.setPoint(user.getPoint() + (long) taille);
+                            userStore.updateUser(user);
+                            out.println(" ----Upload is successful---- ");
+                        } else {
+                            out.println("lol, tu ne peux pas envoyer plus de "+ nbrequest +" requetes par minute");
+                            MailSender.SendLinkTo(user.getEmail(), "lol non "+user.getLevel());
                         }
-
                     }else{
                         out.println("User dont exist");
                     }
                 }
-            
         } catch (Exception e) {
             e.printStackTrace();
             out.println(e.toString());
