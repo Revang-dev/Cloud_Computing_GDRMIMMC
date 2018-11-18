@@ -43,8 +43,8 @@
         <servlet-class>servlet.Purge</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>queuenoobpull</servlet-name>
-        <servlet-class>servlet.QeueNoobPull</servlet-class>
+        <servlet-name>casualleetpull</servlet-name>
+        <servlet-class>servlet.CasualLeetPull</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>noobworker</servlet-name>
@@ -87,8 +87,8 @@
          <url-pattern>/purge</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>queuenoobpull</servlet-name>
-        <url-pattern>/queuenoobpull</url-pattern>
+        <servlet-name>casualleetpull</servlet-name>
+        <url-pattern>/casualleetpull</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>noobworker</servlet-name>

@@ -1,12 +1,12 @@
 package servlet;
 
-import Database.CloudStore;
 import Database.FileDataStore;
 import Database.UserDataStore;
 import Entity.Users;
 import Entity.permissionUpload;
 import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.QueueFactory;
+import com.google.appengine.api.taskqueue.TaskHandle;
 import com.google.appengine.api.taskqueue.TaskOptions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -20,13 +20,30 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-public class NoobDownload extends HttpServlet{
+public class CasualLeetPull extends HttpServlet{
     UserDataStore userManager = UserDataStore.getInstance();
     FileDataStore fileManager = FileDataStore.getInstance();
-    CloudStore storeManager = new CloudStore();
 
+    @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
+            /*
+            Queue queue = QueueFactory.getQueue("pull-queue");
+            String content = email + "/" + fileName;
+
+            queue.add(TaskOptions.Builder.withMethod(TaskOptions.Method.PULL)
+                    .payload(content)
+                    .tag(email));
+
+            List<TaskHandle> tasks = queue.leaseTasksByTag(300, TimeUnit.SECONDS, 1, email);
+
+            String message = processTasks(tasks, queue);
+            out.println(message); */
+
         PrintWriter out = resp.getWriter();
         StringBuffer jb = new StringBuffer();
         String line = null;
@@ -47,15 +64,7 @@ public class NoobDownload extends HttpServlet{
                 JsonObject body = (JsonObject) jsontest.get("Body");
                 String email = body.get("mail").getAsString();
                 String fileName = body.get("fileName").getAsString();
-
-
-                //NOT WORKING. CANNOT UPLOAD QUEUE.XML
-                /*resultat = QueueFactory.getQueue("noob");
-                Queue queue = QueueFactory.getDefaultQueue();
-                resultat.add(TaskOptions.Builder.withUrl("/noobworker")
-                        .param("email", email)
-                        .param("fileName", fileName));*/
-
+                out.println("here");
 
                 Users user = userManager.getUserbyMail(email);
                 String[] tab_req = user.getReq().split(",");
@@ -63,7 +72,7 @@ public class NoobDownload extends HttpServlet{
                 if(permission.canSendRequest(tab_req)) {
                     String trueUrl = fileManager.getFileByName(fileName).getUrl();
                     out.println("un mail de téléchargement a été envoyé :"+trueUrl);
-                    storeManager.downloadFile(user,trueUrl);
+                    MailSender.SendLinkTo(user.getEmail(), trueUrl);
                 }else{
                     out.println("lol non, vous devez attendre 1 min avant de lancer votre prochaine requete d'upload");
                     MailSender.SendLinkTo(user.getEmail(), "lol non, vous devez attendre 1 min avant de lancer votre prochaine requete d'upload");
@@ -74,5 +83,18 @@ public class NoobDownload extends HttpServlet{
             out.println(e.toString());
         }
     }
+
+
+    private String processTasks(List<TaskHandle> tasks, Queue q) throws UnsupportedEncodingException {
+        for (TaskHandle task : tasks) {
+            String payload = new String(task.getPayload());
+            String[] array = payload.split("/");
+            Users user = userManager.getUserbyMail(array[0]);
+            MailSender.SendLinkTo(user.getEmail(), "sa marche");
+            q.deleteTask(task);
+        }
+        return "sa marche je crois";
+    }
+
 
 }

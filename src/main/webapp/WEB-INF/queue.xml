@@ -4,4 +4,8 @@
       <name>pull-queue</name>
       <mode>pull</mode>
     </queue>
+  <queue>
+    <name>noob</name>
+    <mode>10/s</mode>
+  </queue>
   </queue-entries>
