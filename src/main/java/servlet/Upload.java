@@ -6,11 +6,12 @@ import Database.UserDataStore;
 import Entity.Files;
 import Entity.Users;
 import Entity.permissionUpload;
-import mail.MailSender;
+//import mail.MailSender;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import mail.MailSender;
 import utils.EmptyFileGenerator;
 
 import javax.servlet.ServletException;
@@ -69,10 +70,10 @@ public class Upload extends HttpServlet {
                     byte[] file = gen.CreateLocalFile(5);
                     String type = body.get("type").getAsString();
                     Users user = userStore.getUserbyMail(email);
+                    String trueUrl = "";
                     if (user != null) {
                         String[] tab_req = user.getReq().split(",");
                         permissionUpload permission = new permissionUpload(user.getLevel());
-                        int nbrequest = 1 ;
                         if (permission.canSendRequest(tab_req)) {
                             tab_req = permission.tab_reqUpadted(tab_req);
                             switch (user.getLevel()) {
@@ -81,26 +82,26 @@ public class Upload extends HttpServlet {
                                     user.setReq(tab_req[0] + ",0,0,0");
                                     break;
                                 case "Casual":
-                                    nbrequest = 2;
                                     out.println("Casual case");
                                     user.setReq(tab_req[0] + "," + tab_req[1] + ",0,0");
                                     break;
                                 case "Leet":
-                                    nbrequest = 4;
                                     out.println("LEET case");
                                     user.setReq(tab_req[0] + "," + tab_req[1] + "," + tab_req[2] + "," + tab_req[3]);
                                     break;
                             }
-                            String trueUrl = "" + cloud.uploadFile(name, file);
+                            trueUrl = "" + cloud.uploadFile(name, file);
                             fileManager.addFile(new Files(email, name, trueUrl, taille, type));
                             out.println("FILE POSTED ON :" + trueUrl);
                             user.setPoint(user.getPoint() + (long) taille);
                             userStore.updateUser(user);
                             out.println(" ----Upload is successful---- ");
+                            MailSender.SendLinkTo(user.getEmail(), trueUrl);
                         } else {
-                            out.println("lol, tu ne peux pas envoyer plus de "+ nbrequest +" requetes par minute");
-                            MailSender.SendLinkTo(user.getEmail(), "lol non "+user.getLevel());
+                            out.println("lol non, vous devez attendre 1 min avant de lancer votre prochaine requete d'upload");
+                            MailSender.SendLinkTo(user.getEmail(), "lol non, vous devez attendre 1 min avant de lancer votre prochaine requete d'upload");
                         }
+                        MailSender.SendLinkTo(user.getEmail(), trueUrl);
                     }else{
                         out.println("User dont exist");
                     }
