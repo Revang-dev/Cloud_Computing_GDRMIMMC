@@ -67,15 +67,20 @@ public class CasualLeetPull extends HttpServlet{
                 out.println("here");
 
                 Users user = userManager.getUserbyMail(email);
-                String[] tab_req = user.getReq().split(",");
-                permissionUpload permission = new permissionUpload(user.getLevel());
-                if(permission.canSendRequest(tab_req)) {
-                    String trueUrl = fileManager.getFileByName(fileName).getUrl();
-                    out.println("un mail de téléchargement a été envoyé :"+trueUrl);
-                    MailSender.SendLinkTo(user.getEmail(), trueUrl);
+                if(!(user.getLevel().equals("Noob"))) {
+                    String[] tab_req = user.getReq().split(",");
+                    permissionUpload permission = new permissionUpload(user.getLevel());
+                    if (permission.canSendRequest(tab_req)) {
+                        String trueUrl = fileManager.getFileByName(fileName).getUrl();
+                        out.println("un mail de telechargement a ete envoye :" + trueUrl);
+                        MailSender.SendLinkTo(user.getEmail(), trueUrl);
+                    } else {
+                        out.println("lol non, vous devez attendre 1 min avant de lancer votre prochaine requete d'upload");
+                        MailSender.SendLinkTo(user.getEmail(), "lol non, vous devez attendre 1 min avant de lancer votre prochaine requete d'upload");
+                        //storeManager.downloadFile(user,trueUrl);
+                    }
                 }else{
-                    out.println("lol non, vous devez attendre 1 min avant de lancer votre prochaine requete d'upload");
-                    MailSender.SendLinkTo(user.getEmail(), "lol non, vous devez attendre 1 min avant de lancer votre prochaine requete d'upload");
+                    out.println("vous etes un noob");
                 }
             }
         } catch (Exception e) {

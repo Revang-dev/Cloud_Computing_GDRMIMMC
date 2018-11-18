@@ -23,7 +23,7 @@
 
         body
         {
-            background-color : 	#8B008B ;
+            background-color : 	#00008B ;
             color : white
         }
 
@@ -119,8 +119,38 @@
                       alert(this.responseText);
                 }
             };
-
           }
+
+
+          function downloadNoobFile(){
+                      var xhr = new XMLHttpRequest();
+                      var url = baseURL+ "ndownload";
+                      console.log(url);
+                      xhr.open("POST", url, true);
+                      xhr.setRequestHeader("Content-type", "application/json");
+                      var data = JSON.stringify({ "Action" : "download", "Body": { "mail":document.getElementById('mail2').value, "fileName": document.getElementById('fileName2').value }});
+                      xhr.send(data);
+                      xhr.onreadystatechange = function() {
+                      if (this.readyState == 4 && this.status == 200) {
+                                alert(this.responseText);
+                          }
+                      };
+                    }
+
+        function downloadCasualLeetFile(){
+                      var xhr = new XMLHttpRequest();
+                      var url = baseURL+ "cldownload";
+                      console.log(url);
+                      xhr.open("POST", url, true);
+                      xhr.setRequestHeader("Content-type", "application/json");
+                      var data = JSON.stringify({ "Action" : "download", "Body": { "mail":document.getElementById('mail2').value, "fileName": document.getElementById('fileName2').value }});
+                      xhr.send(data);
+                      xhr.onreadystatechange = function() {
+                      if (this.readyState == 4 && this.status == 200) {
+                                alert(this.responseText);
+                          }
+                      };
+                    }
 
 
 
@@ -156,12 +186,17 @@
         Nom: <input type="text" name="enter" class="enter" value="video0" id="name"><br><br>
         <input type="submit"  value="Upload" onclick="uploadFile();"/>
 
-<h2>Téléchager un fichier</h2>
-        Username: <input type="text" name="enter" class="enter" value="Jean Michel" id="usernameconv"><br><br>
-        Fichier: <input type="text" name="enter" class="enter" value="video1" id="videoconv"><br><br>
-        <input type="submit"  value="Download" onclick="downloedFile();"/>
+<h2>Téléchager un fichier in Noob Queue</h2>
+        Mail: <input type="text" name="enter" class="enter" value="rydy@unice.fr" id="mail2"><br><br>
+        File name: <input type="text" name="enter" class="enter" value="video0" id="fileName2"><br><br>
+        <input type="submit"  value="Download" onclick="downloadNoobFile();"/>
 
-<h2>{{url}}</h2>
+<h2>Téléchager un fichier in Casual and Leet Queue</h2>
+        Mail: <input type="text" name="enter" class="enter" value="rydy@unice.fr" id="mail2"><br><br>
+        File name: <input type="text" name="enter" class="enter" value="video0" id="fileName2"><br><br>
+        <input type="submit"  value="Download" onclick="downloadCasualLeetFile();"/>
+
+
 </div>
 
 </body>
