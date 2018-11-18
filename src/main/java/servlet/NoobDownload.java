@@ -3,6 +3,7 @@ package servlet;
 import Database.CloudStore;
 import Database.FileDataStore;
 import Database.UserDataStore;
+import Entity.Files;
 import Entity.Users;
 import Entity.permissionUpload;
 import com.google.appengine.api.taskqueue.Queue;
@@ -61,12 +62,11 @@ public class NoobDownload extends HttpServlet{
                 String[] tab_req = user.getReq().split(",");
                 permissionUpload permission = new permissionUpload(user.getLevel());
                 if(permission.canSendRequest(tab_req)) {
-                    String trueUrl = fileManager.getFileByName(fileName).getUrl();
-                    out.println("un mail de téléchargement a été envoyé :"+trueUrl);
-                    storeManager.downloadFile(user,trueUrl);
+                    Files file = fileManager.getFileByName(fileName);
+                    storeManager.downloadFile(user,file);
                 }else{
-                    out.println("lol non, vous devez attendre 1 min avant de lancer votre prochaine requete d'upload");
-                    MailSender.SendLinkTo(user.getEmail(), "lol non, vous devez attendre 1 min avant de lancer votre prochaine requete d'upload");
+                    out.println("lol non, vous devez attendre 1 min avant de lancer votre prochaine requete download");
+                    MailSender.SendLinkTo(user.getEmail(), "lol non, vous devez attendre 1 min avant de lancer votre prochaine requete download");
                 }
             }
         } catch (Exception e) {

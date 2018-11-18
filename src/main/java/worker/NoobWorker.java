@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import Database.CloudStore;
 import Database.FileDataStore;
 import Database.UserDataStore;
+import Entity.Files;
 import Entity.Users;
 import Entity.permissionUpload;
 import mail.MailSender;
@@ -29,11 +30,11 @@ public class NoobWorker extends HttpServlet{
         String[] tab_req = user.getReq().split(",");
         permissionUpload permission = new permissionUpload(user.getLevel());
         if(permission.canSendRequest(tab_req)) {
-            String trueUrl = fileManager.getFileByName(fileName).getUrl();
-            storeManager.downloadFile(user,trueUrl);
+            Files file = fileManager.getFileByName(fileName);
+            storeManager.downloadFile(user,file);
         }else{
-            out.println("lol non, vous devez attendre 1 min avant de lancer votre prochaine requete d'upload");
-            MailSender.SendLinkTo(user.getEmail(), "lol non, vous devez attendre 1 min avant de lancer votre prochaine requete d'upload");
+            out.println("lol non, vous devez attendre 1 min avant de lancer votre prochaine requete de download");
+            MailSender.SendLinkTo(user.getEmail(), "lol non, vous devez attendre 1 min avant de lancer votre prochaine requete download");
         }
     }
 }
