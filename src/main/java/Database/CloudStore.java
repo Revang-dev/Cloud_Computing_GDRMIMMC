@@ -46,9 +46,13 @@ public class CloudStore {
 
     public void downloadFile(Users user, Files blobName) throws FileNotFoundException, IOException{
 
-        BlobInfo blobInfo = storage.get(BlobId.of(bucket, blobName.getName()));
+        BlobInfo blobInfo = storage.get(BlobInfo
+                .newBuilder(bucket, blobName.getName())
+                .setAcl(new ArrayList<>(Arrays.asList(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER))))
+                .build().getBlobId());
         URL signedUrl = storage.signUrl(BlobInfo.newBuilder(bucket, blobName.getName()).build(),
-                5, TimeUnit.MINUTES, Storage.SignUrlOption.signWith(ServiceAccountCredentials.fromStream(
+                5, TimeUnit.MINUTES,
+                Storage.SignUrlOption.signWith(ServiceAccountCredentials.fromStream(
                         new FileInputStream(blobInfo.getMediaLink()))));
         MailSender.SendLinkTo(user.getEmail(), signedUrl.toString());
 

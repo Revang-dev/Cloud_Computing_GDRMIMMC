@@ -31,7 +31,11 @@ public class NoobWorker extends HttpServlet{
         permissionUpload permission = new permissionUpload(user.getLevel());
         if(permission.canSendRequest(tab_req)) {
             Files file = fileManager.getFileByName(fileName);
-            storeManager.downloadFile(user,file);
+            String trueUrl = fileManager.getFileByName(fileName).getUrl();
+            out.println("un mail de téléchargement a été envoyé :"+trueUrl);
+            MailSender.SendLinkTo(user.getEmail(), trueUrl);
+
+            //storeManager.downloadFile(user,file);
         }else{
             out.println("lol non, vous devez attendre 1 min avant de lancer votre prochaine requete de download");
             MailSender.SendLinkTo(user.getEmail(), "lol non, vous devez attendre 1 min avant de lancer votre prochaine requete download");
