@@ -101,7 +101,6 @@ public class Upload extends HttpServlet {
                             out.println("lol non, vous devez attendre 1 min avant de lancer votre prochaine requete d'upload");
                             MailSender.SendLinkTo(user.getEmail(), "lol non, vous devez attendre 1 min avant de lancer votre prochaine requete d'upload");
                         }
-                        MailSender.SendLinkTo(user.getEmail(), trueUrl);
                     }else{
                         out.println("User dont exist");
                     }
