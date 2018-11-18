@@ -55,7 +55,7 @@ public class Connexion extends HttpServlet {
 				String email = body.get("userID").getAsString();
 				String pass = body.get("pass").getAsString();
 				user = UserDataStore.getUser(email, pass);
-				out.println(user.toString());
+				out.println("The connection " + user.toString() + " is successful");
 			}
 
 		}

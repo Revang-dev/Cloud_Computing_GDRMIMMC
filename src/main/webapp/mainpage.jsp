@@ -57,11 +57,12 @@
         var accountlevel;
         var fichier;
         var length;
+        var baseURL = window.location.href
 
 
         function postaccount() {
                    var xhr = new XMLHttpRequest();
-                   var url = "https://cloudprojetmomo.appspot.com/creation";
+                   var url = baseURL+ "creation";
                    xhr.open("POST", url, true);
                    xhr.setRequestHeader("Content-type", "application/json");
                    var data = JSON.stringify({ "Action" : "addUser", "Body": { "userID":document.getElementById('username').value, "pass": document.getElementById('mdp').value } });
@@ -76,7 +77,8 @@
 
          function postaccountrank() {
                             var xhr = new XMLHttpRequest();
-                            var url = "https://cloudprojetmomo.appspot.com/creation";
+                            var url = baseURL+ "creation";
+                            console.log(url);
                             xhr.open("POST", url, true);
                             xhr.setRequestHeader("Content-type", "application/json");
                             var data = JSON.stringify({ "Action" : "addUser", "Body": { "userID":document.getElementById('username2').value, "pass": document.getElementById('mdp2').value, "level": document.getElementById('rank').value } });
@@ -90,7 +92,8 @@
 
          function connexion() {
                 var xhr = new XMLHttpRequest();
-                var url = "https://cloudprojetmomo.appspot.com/connexion";
+                var url = baseURL+ "connexion";
+                console.log(url);
                 xhr.open("POST", url, true);
                 xhr.setRequestHeader("Content-type", "application/json");
                 var data = JSON.stringify({ "Action" : "Connexion", "Body": { "userID":document.getElementById('username3').value, "pass": document.getElementById('mdp3').value }});
@@ -101,6 +104,23 @@
                    }
                 };
            }
+
+
+          function uploadFile(){
+            var xhr = new XMLHttpRequest();
+            var url = baseURL+ "upload";
+            console.log(url);
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-type", "application/json");
+            var data = JSON.stringify({ "Action" : "Upload", "Body": { "userID":document.getElementById('username4').value, "filePath": document.getElementById('path').value, "fileSize": document.getElementById('size').value,"type": document.getElementById('type').value, "name": document.getElementById('name').value }});
+            xhr.send(data);
+            xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                      alert(this.responseText);
+                }
+            };
+
+          }
 
 
 
@@ -128,17 +148,20 @@
    Passeword: <input type="text" name="enter" class="enter" value="1234" id="mdp3"><br><br>
    <input type="submit"  value="Connexion" onclick="connexion();"/>
 
-<h2>Poster un fichier</h2>
-        Username: <input type="text" name="enter" class="enter" value="Jean Michel" id="username"><br><br>
-        Fichier: <input type="text" name="enter" class="enter" value="video1" id="video"><br><br>
-        Taille du fichier: <input type="text" name="enter" class="enter" value="70" id="length"><br><br>
-        <input type="submit"  value="Poster" onclick="postvideo();"/>
+<h2>Upload un fichier</h2>
+        Username: <input type="text" name="enter" class="enter" value="rydy@unice.fr" id="username4"><br><br>
+        Chemin du fichier: <input type="text" name="enter" class="enter" value="User/Desktop/photo.jpg" id="path"><br><br>
+        Taille du fichier: <input type="text" name="enter" class="enter" value="5" id="size"><br><br>
+        Type: <input type="text" name="enter" class="enter" value="image" id="type"><br><br>
+        Nom: <input type="text" name="enter" class="enter" value="video0" id="name"><br><br>
+        <input type="submit"  value="Upload" onclick="uploadFile();"/>
 
 <h2>Téléchager un fichier</h2>
         Username: <input type="text" name="enter" class="enter" value="Jean Michel" id="usernameconv"><br><br>
         Fichier: <input type="text" name="enter" class="enter" value="video1" id="videoconv"><br><br>
-        <input type="submit"  value="Convertir" onclick="postconvertvideo();"/>
+        <input type="submit"  value="Download" onclick="downloedFile();"/>
 
+<h2>{{url}}</h2>
 </div>
 
 </body>

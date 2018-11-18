@@ -77,6 +77,13 @@ public class Users {
 
     public void setPoint(long nbr){
         this.point = nbr;
+        if(this.point<100){
+            this.level = "Noob";
+        }else if(this.point>=100){
+            this.level = "Casual";
+        }else{
+            this.level = "Leet";
+        }
     }
 
     public void setPassword(String mdp){

@@ -31,7 +31,7 @@ public class Upload extends HttpServlet {
         userID: Bob@gmail.com
         filePath: “Bob/myVideos/”
         name: "video5.mp4"
-        videoSize: 34.0
+        fileSize: 34.0
         type: video
         }
     }
@@ -63,12 +63,11 @@ public class Upload extends HttpServlet {
                     String name = body.get("name").getAsString();
                     String fileURL = body.get("filePath").getAsString();
                     String email = body.get("userID").getAsString();
-                    double taille = body.get("videoSize").getAsDouble();
+                    double taille = body.get("fileSize").getAsDouble();
                     // byte[] file = java.nio.file.Files.readAllBytes(littefile);
                     byte[] file = gen.CreateLocalFile(5);
                     String type = body.get("type").getAsString();
                     Users user = userStore.getUserbyMail(email);
-
                     if (user != null) {
                         long time = System.currentTimeMillis();
                         String[] tab_req = user.getReq().split(",");
@@ -127,6 +126,9 @@ public class Upload extends HttpServlet {
                                     }
                                 }
                         }
+                        out.println(" ----Upload is successful---- ");
+                    }else{
+                        out.println("User dont exist");
                     }
                 }
             

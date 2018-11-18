@@ -69,7 +69,7 @@ public class CreationUser extends HttpServlet{
                 String mdp = body.get("pass").getAsString();
                 Users newAccount = new Users(username, mdp, level);
                 userManager.addUser(newAccount);
-                out.println(newAccount.toString());
+                out.println(newAccount.toString()+ " was successfully created");
             }
         }
         catch (Exception e) {
