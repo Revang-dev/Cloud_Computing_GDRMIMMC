@@ -23,8 +23,8 @@
 
         body
         {
-            background-color : 	#00008B ;
-            color : white
+            background-color : 	#DEB887;
+            color : white;
         }
 
 
@@ -143,7 +143,7 @@
                       console.log(url);
                       xhr.open("POST", url, true);
                       xhr.setRequestHeader("Content-type", "application/json");
-                      var data = JSON.stringify({ "Action" : "download", "Body": { "mail":document.getElementById('mail2').value, "fileName": document.getElementById('fileName2').value }});
+                      var data = JSON.stringify({ "Action" : "download", "Body": { "mail":document.getElementById('mail3').value, "fileName": document.getElementById('fileName3').value }});
                       xhr.send(data);
                       xhr.onreadystatechange = function() {
                       if (this.readyState == 4 && this.status == 200) {
@@ -192,9 +192,14 @@
         <input type="submit"  value="Download" onclick="downloadNoobFile();"/>
 
 <h2>Téléchager un fichier in Casual and Leet Queue</h2>
-        Mail: <input type="text" name="enter" class="enter" value="rydy@unice.fr" id="mail2"><br><br>
-        File name: <input type="text" name="enter" class="enter" value="video0" id="fileName2"><br><br>
+        Mail: <input type="text" name="enter" class="enter" value="rydy@unice.fr" id="mail3"><br><br>
+        File name: <input type="text" name="enter" class="enter" value="video0" id="fileName3"><br><br>
         <input type="submit"  value="Download" onclick="downloadCasualLeetFile();"/>
+
+<br>
+<a href=leaderboard>LeaderBoard</a>
+<br>
+<a href=purge>Purge les BD</a>
 
 
 </div>
