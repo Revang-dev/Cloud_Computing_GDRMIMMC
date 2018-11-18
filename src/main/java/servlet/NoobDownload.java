@@ -15,7 +15,7 @@ public class NoobDownload extends HttpServlet{
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String email = req.getParameter("mail");
         String fileName = req.getParameter("fileName");
-        Queue queue = QueueFactory.getQueue("noob");
+        Queue queue = QueueFactory.getQueue("casualleet");
         queue.add(TaskOptions.Builder.withUrl("/noobworker")
                                     .param("email",email)
                                     .param("fileName",fileName));

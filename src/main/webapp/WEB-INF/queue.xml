@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
   <queue-entries>
     <queue>
-      <name>noob</name>
-      <rate>20/m</rate>
-    </queue>
-    <queue>
-      <name>casualleet</name>
+      <name>pull-queue</name>
       <mode>pull</mode>
     </queue>
-    <queue>
-        <name>delete</name>
-        <rate>20/m</rate>
-    </queue>
-
   </queue-entries>

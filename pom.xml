@@ -131,6 +131,10 @@
         <groupId>com.google.cloud.tools</groupId>
         <artifactId>appengine-maven-plugin</artifactId>
         <version>${appengine-maven-plugin-version}</version>
+        <configuration>
+          <deploy.promote>true</deploy.promote>
+          <deploy.stopPreviousVersion>true</deploy.stopPreviousVersion>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
