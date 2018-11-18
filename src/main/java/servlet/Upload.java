@@ -5,6 +5,7 @@ import Database.CloudStore;
 import Database.UserDataStore;
 import Entity.Files;
 import Entity.Users;
+import Entity.permissionUpload;
 import mail.MailSender;
 
 import com.google.gson.JsonElement;
@@ -69,64 +70,62 @@ public class Upload extends HttpServlet {
                     String type = body.get("type").getAsString();
                     Users user = userStore.getUserbyMail(email);
                     if (user != null) {
-                        long time = System.currentTimeMillis();
                         String[] tab_req = user.getReq().split(",");
+                        permissionUpload permission = new permissionUpload(user.getLevel());
                         switch (user.getLevel()) {
 
                             case "Noob" :
                                 out.println("NOOB case");
-                                if (time - Long.parseLong(tab_req[0]) > 60000) {
-                                    tab_req[0] = "" + time;
+                                if (permission.canSendRequest(tab_req)) {
+                                    tab_req = permission.tab_reqUpadted(tab_req);
                                     user.setReq(tab_req[0] + ",0,0,0");
                                     String trueUrl = "" + cloud.uploadFile(name, file);
                                     fileManager.addFile(new Files(email, name, trueUrl, taille, type));
                                     out.println("FILE POSTED ON :" + trueUrl);
                                     user.setPoint(user.getPoint() + (long) taille);
-                                    if (user.getPoint() > 100) {
-                                    	user.levelUp();
-                                    }
                                     userStore.updateUser(user);
+                                    out.println(" ----Upload is successful---- ");
                                     break;
                                 } else {
-                                    out.println("NOOOOOOOB");
+                                    out.println("lol non noob");
                                     MailSender.SendLinkTo(user.getEmail(), "lol non noob");
                                     break;
                                 }
-
                             case "Casual":
                                 out.println("CASUAL case");
-                                for (int i = 0; i < 2; i++) {
-                                    if (time - Long.parseLong(tab_req[i]) > 60000) {
-                                        tab_req[i] = "" + time;
-                                        user.setReq(tab_req[0] + "," + tab_req[1] + ",0,0");
-                                        String trueUrl = "" + cloud.uploadFile(name, file);
-                                        fileManager.addFile(new Files(email, name, trueUrl, taille, type));
-                                        out.println("FILE POSTED ON :" + trueUrl);
-                                        user.setPoint(user.getPoint() + (long) taille);
-                                        if (user.getPoint() > 200) {
-                                        	user.levelUp();
-                                        }
-                                        userStore.updateUser(user);
-                                        break;
-                                    }
+                                if(permission.canSendRequest(tab_req)) {
+                                    tab_req = permission.tab_reqUpadted(tab_req);
+                                    user.setReq(tab_req[0] + "," + tab_req[1] + ",0,0");
+                                    String trueUrl = "" + cloud.uploadFile(name, file);
+                                    fileManager.addFile(new Files(email, name, trueUrl, taille, type));
+                                    out.println("FILE POSTED ON :" + trueUrl);
+                                    user.setPoint(user.getPoint() + (long) taille);
+                                    userStore.updateUser(user);
+                                    out.println(" ----Upload is successful---- ");
+                                    break;
+                                }else {
+                                    out.println("lol tu peux pas envoyer plus de 2 requetes en moins de 1 min");
+                                    break;
                                 }
 
                             case "Leet":
                                 out.println("LEET case");
-                                for (int i = 0; i < 4; i++) {
-                                    if (time - Long.parseLong(tab_req[i]) > 60000) {
-                                        tab_req[i] = "" + time;
-                                        user.setReq(tab_req[0] + "," + tab_req[1] + "," + tab_req[2] + "," + tab_req[3]);
-                                        String trueUrl = "" + cloud.uploadFile(name, file);
-                                        fileManager.addFile(new Files(email, name, trueUrl, taille, type));
-                                        out.println("FILE POSTED ON :" + trueUrl);
-                                        user.setPoint(user.getPoint() + (long) taille);
-                                        userStore.updateUser(user);
-                                        break;
-                                    }
+                                if (permission.canSendRequest(tab_req)) {
+                                    tab_req = permission.tab_reqUpadted(tab_req);
+                                    user.setReq(tab_req[0] + "," + tab_req[1] + "," + tab_req[2] + "," + tab_req[3]);
+                                    String trueUrl = "" + cloud.uploadFile(name, file);
+                                    fileManager.addFile(new Files(email, name, trueUrl, taille, type));
+                                    out.println("FILE POSTED ON :" + trueUrl);
+                                    user.setPoint(user.getPoint() + (long) taille);
+                                    userStore.updateUser(user);
+                                    out.println(" ----Upload is successful---- ");
+                                    break;
+                                }else {
+                                    out.println("lol tu peux pas envoyer plus de 4 requetes en moins de 1 min");
+                                    break;
                                 }
                         }
-                        out.println(" ----Upload is successful---- ");
+
                     }else{
                         out.println("User dont exist");
                     }

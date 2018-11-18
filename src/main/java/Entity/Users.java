@@ -79,9 +79,9 @@ public class Users {
         this.point = nbr;
         if(this.point<100){
             this.level = "Noob";
-        }else if(this.point>=100){
+        }else if(this.point>=100 && this.point < 200){
             this.level = "Casual";
-        }else{
+        }else {
             this.level = "Leet";
         }
     }
