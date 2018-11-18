@@ -1,0 +1,251 @@
+{
+	"variables": [],
+	"info": {
+		"name": "SACC",
+		"_postman_id": "87313fed-7c4b-48ac-9fd0-63ee5aab3d05",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Purge",
+			"request": {
+				"url": "https://brave-sonar-218511.appspot.com/purge",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\": \"addUser\" ,\r\n    \"Body\": {\r\n        \"userID\":\"noob1@mail.fr\",\r\n        \"pass\":\"password\",\r\n        \"level\": \"Noob\"\r\n    }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create noob1",
+			"request": {
+				"url": "https://brave-sonar-218511.appspot.com/creation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\": \"addUser\" ,\r\n    \"Body\": {\r\n        \"userID\":\"noob1@mail.fr\",\r\n        \"pass\":\"password\",\r\n        \"level\": \"Noob\"\r\n    }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create noob2",
+			"request": {
+				"url": "https://brave-sonar-218511.appspot.com/creation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\": \"addUser\" ,\r\n    \"Body\": {\r\n        \"userID\":\"noob2@mail.fr\",\r\n        \"pass\":\"password\",\r\n        \"level\": \"Noob\"\r\n    }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create casual1",
+			"request": {
+				"url": "https://brave-sonar-218511.appspot.com/creation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\": \"addUser\" ,\r\n    \"Body\": {\r\n        \"userID\":\"casual1@mail.fr\",\r\n        \"pass\":\"password\",\r\n        \"level\": \"Casual\"\r\n    }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create casual2",
+			"request": {
+				"url": "https://brave-sonar-218511.appspot.com/creation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\": \"addUser\" ,\r\n    \"Body\": {\r\n        \"userID\":\"casual2@mail.fr\",\r\n        \"pass\":\"password\",\r\n        \"level\": \"Casual\"\r\n    }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create leet1",
+			"request": {
+				"url": "https://brave-sonar-218511.appspot.com/creation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\": \"addUser\" ,\r\n    \"Body\": {\r\n        \"userID\":\"leet1@mail.fr\",\r\n        \"pass\":\"password\",\r\n        \"level\": \"Leet\"\r\n    }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create leet2",
+			"request": {
+				"url": "https://brave-sonar-218511.appspot.com/creation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\": \"addUser\" ,\r\n    \"Body\": {\r\n        \"userID\":\"leet2@mail.fr\",\r\n        \"pass\":\"password\",\r\n        \"level\": \"Leet\"\r\n    }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Noob to Casual",
+			"request": {
+				"url": "https://brave-sonar-218511.appspot.com/upload",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\": \"Upload\",\r\n    \"Body\": {\r\n      \"userID\": \"noob1@mail.fr\",\r\n      \"filePath\": \"C:/Users/roody/Documents/GitHub/Cloud_Computing_GDRMIMMC/test1\",\r\n      \"name\": \"test1\",\r\n      \"fileSize\": 101,\r\n      \"type\": \"file\"\r\n    }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Casual to Leet",
+			"request": {
+				"url": "https://brave-sonar-218511.appspot.com/upload",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\": \"Upload\",\r\n    \"Body\": {\r\n      \"userID\": \"noob1@mail.fr\",\r\n      \"filePath\": \"C:/Users/roody/Documents/GitHub/Cloud_Computing_GDRMIMMC/test2\",\r\n      \"name\": \"test2\",\r\n      \"fileSize\": 101,\r\n      \"type\": \"file\"\r\n    }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Download noob",
+			"request": {
+				"url": "https://brave-sonar-218511.appspot.com/ndownload",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\":\"download\",\r\n    \"Body\" :{\r\n        \"mail\": \"noob2@mail.fr\",\r\n        \"fileName\": \"test1\"\r\n    }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Download casual",
+			"request": {
+				"url": "https://brave-sonar-218511.appspot.com/cldownload",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\":\"download\",\r\n    \"Body\" :{\r\n        \"mail\": \"casual2@mail.fr\",\r\n        \"fileName\": \"test1\"\r\n    }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Download leet",
+			"request": {
+				"url": "https://brave-sonar-218511.appspot.com/cldownload",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Action\":\"download\",\r\n    \"Body\" :{\r\n        \"mail\": \"leet2@mail.fr\",\r\n        \"fileName\": \"test1\"\r\n    }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
